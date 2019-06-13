@@ -1,0 +1,16 @@
+package club.fdawei.mourouter.sample.suba.service
+
+import android.util.Log
+import club.fdawei.mourouter.annotation.Route
+import club.fdawei.mourouter.api.component.instance.Instantiable
+import club.fdawei.mourouter.sample.base.service.IService
+
+/**
+ * Created by david on 2019/05/30.
+ */
+@Route(path = "/suba/service/aservice")
+class AService : IService, Instantiable {
+    override fun printName() {
+        Log.i("AService", "my name is AService@${hashCode()}")
+    }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="club.fdawei.mourouter.sample.subb">
+
+    <application>
+        <activity android:name="club.fdawei.mourouter.sample.subb.BActivity">
+        </activity>
+    </application>
+
+</manifest>

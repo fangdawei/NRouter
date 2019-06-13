@@ -1,0 +1,17 @@
+include ':mourouter-annotation', ':mourouter-processor', ':mourouter-plugin', ':mourouter-api' , ':main', ':suba', ':subb', ':subc', ':base'
+
+project(':base').projectDir = new File('sample/base')
+project(':main').projectDir = new File('sample/main')
+project(':suba').projectDir = new File('sample/suba')
+project(':subb').projectDir = new File('sample/subb')
+project(':subc').projectDir = new File('sample/subc')
+
+
+gradle.beforeProject {
+    def localRepoDir = new File(rootDir, 'local-repo')
+    gradle.rootProject.ext.localRepoPath = localRepoDir.absolutePath
+}
+
+
+
+
