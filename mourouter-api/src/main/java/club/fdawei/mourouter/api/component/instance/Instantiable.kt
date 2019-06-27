@@ -6,7 +6,8 @@ package club.fdawei.mourouter.api.component.instance
  */
 interface Instantiable {
 
-    fun init(data: InitData) {
-
-    }
+    /**
+     * 初始化方法，可能会被调用多次
+     */
+    fun init(initContext: InitContext) {}
 }

@@ -23,20 +23,21 @@ class ServiceRouteHandler(info: HandleInfo) : RouteHandler(info) {
             return
         }
         val intent = Intent(context, info.target.java)
-        when (data.envs.get(ActionType::class)) {
-            ActionType.BIND -> {
+        when (data.envs.get(ServiceOption::class)) {
+            ServiceOption.BIND -> {
                 val conn = data.envs.get(ServiceConnection::class, assignable = true)
                 if (conn != null) {
-                    context.bindService(intent, conn, data.flags)
+                    val flags = if (data.flags > 0) data.flags else Context.BIND_AUTO_CREATE
+                    context.bindService(intent, conn, flags)
                 }
             }
-            ActionType.UNBIND -> {
+            ServiceOption.UNBIND -> {
                 val conn = data.envs.get(ServiceConnection::class, assignable = true)
                 if (conn != null) {
                     context.unbindService(conn)
                 }
             }
-            ActionType.STOP -> {
+            ServiceOption.STOP -> {
                 context.stopService(intent)
             }
             else -> {

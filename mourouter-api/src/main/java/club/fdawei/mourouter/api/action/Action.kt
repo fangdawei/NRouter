@@ -2,7 +2,7 @@ package club.fdawei.mourouter.api.action
 
 import android.os.Bundle
 import android.os.Parcelable
-import club.fdawei.mourouter.api.base.DataContainer
+import club.fdawei.mourouter.api.base.TypeDataContainer
 
 /**
  * Create by david on 2019/05/25.
@@ -11,7 +11,7 @@ interface Action<H> {
 
     fun env(value: Any): H
 
-    fun env(container: DataContainer): H
+    fun env(container: TypeDataContainer): H
 
     fun withFlags(vararg flag: Int): H
 

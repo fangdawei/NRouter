@@ -14,20 +14,13 @@ object SingletonRepository {
     }
 
     fun getOrCreate(kClass: KClass<out Any>): Any? {
-        var instance = get(kClass)
-        if (instance == null) {
-            synchronized(this) {
-                instance = get(kClass)
-                if (instance == null) {
-                    val instanceCreated = InstanceFactory.create(kClass)
-                    if (instanceCreated != null) {
-                        put(kClass, instanceCreated)
-                    }
-                    instance = instanceCreated
+        return get(kClass) ?: synchronized(instanceMap) {
+            get(kClass) ?: InstanceFactory.create(kClass).apply {
+                if (this != null) {
+                    put(kClass, this)
                 }
             }
         }
-        return instance
     }
 
     private fun put(kClass: KClass<out Any>, instance: Any) {

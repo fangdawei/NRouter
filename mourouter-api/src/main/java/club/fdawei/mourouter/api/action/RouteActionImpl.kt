@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 class RouteActionImpl(
     override val uri: String,
     private val router: ((RouteActionImpl) -> RouteHandler?)
-) : RouteAction, RouteActionData, AbsAction<RouteAction>() {
+) : RouteAction, RouteActionData, ActionWrapper<RouteAction>() {
 
     override val host: RouteAction = this
     private val routeHandler: RouteHandler? by lazy { router.invoke(this) }

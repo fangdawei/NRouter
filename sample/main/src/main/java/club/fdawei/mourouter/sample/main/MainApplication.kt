@@ -10,7 +10,7 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        MouRouter.init(this)
         MouRouter.debug = BuildConfig.DEBUG
+        MouRouter.init(this)
     }
 }

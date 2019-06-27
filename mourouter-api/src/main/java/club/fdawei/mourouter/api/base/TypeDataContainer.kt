@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 /**
  * Create by david on 2019/05/26.
  */
-class DataContainer {
+class TypeDataContainer {
 
     private val datas = linkedMapOf<KClass<out Any>, Any>()
 
@@ -13,7 +13,7 @@ class DataContainer {
         datas[value::class] = value
     }
 
-    fun putAll(other: DataContainer) {
+    fun putAll(other: TypeDataContainer) {
         other.datas.forEach { (_, value) ->
             put(value)
         }

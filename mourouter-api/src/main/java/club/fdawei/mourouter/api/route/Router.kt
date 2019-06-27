@@ -2,7 +2,7 @@ package club.fdawei.mourouter.api.route
 
 import club.fdawei.mourouter.api.MouRouter
 import club.fdawei.mourouter.api.action.RouteActionImpl
-import club.fdawei.mourouter.api.base.DataContainer
+import club.fdawei.mourouter.api.base.TypeDataContainer
 import club.fdawei.mourouter.api.common.COMMON_TAG
 import club.fdawei.mourouter.api.provider.MultiProvider
 import club.fdawei.mourouter.api.util.parseRouteArgs
@@ -12,7 +12,7 @@ import club.fdawei.mourouter.api.util.parseRoutePath
  * Create by david on 2019/05/25.
  */
 class Router(
-    private val baseEnvs: DataContainer
+    private val baseEnvs: TypeDataContainer
 ) {
 
     private val routeTable = RouteTable()

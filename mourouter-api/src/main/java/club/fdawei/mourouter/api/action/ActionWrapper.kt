@@ -2,24 +2,24 @@ package club.fdawei.mourouter.api.action
 
 import android.os.Bundle
 import android.os.Parcelable
-import club.fdawei.mourouter.api.base.DataContainer
+import club.fdawei.mourouter.api.base.TypeDataContainer
 
 /**
  * Created by david on 2019/06/04.
  */
-abstract class AbsAction<H> : Action<H>, ActionData {
+abstract class ActionWrapper<H> : Action<H>, ActionData {
 
     abstract val host: H
     override var flags = 0
     override val extras: Bundle = Bundle()
-    override val envs = DataContainer()
+    override val envs = TypeDataContainer()
 
     override fun env(value: Any): H {
         this.envs.put(value)
         return host
     }
 
-    override fun env(container: DataContainer): H {
+    override fun env(container: TypeDataContainer): H {
         this.envs.putAll(container)
         return host
     }

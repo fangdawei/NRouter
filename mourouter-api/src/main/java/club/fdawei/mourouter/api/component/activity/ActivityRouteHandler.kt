@@ -17,8 +17,8 @@ class ActivityRouteHandler(info: HandleInfo) : RouteHandler(info) {
             ExceptionUtils.exception("info is required ,but Null!")
             return
         }
-        when (data.envs.get(ActionType::class)) {
-            ActionType.START_FOR_RESULT -> {
+        when (data.envs.get(ActivityOption::class)) {
+            ActivityOption.START_FOR_RESULT -> {
                 val activity = data.envs.get(Activity::class, assignable = true)
                 if (activity == null) {
                     ExceptionUtils.exception(

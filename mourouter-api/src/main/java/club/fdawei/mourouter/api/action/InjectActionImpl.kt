@@ -9,7 +9,7 @@ import club.fdawei.mourouter.api.inject.Injector
 class InjectActionImpl(
     private val getInjector: (Any) -> Injector?,
     private val getProvider: (Any) -> AutowiredProvider?
-) : InjectAction, AbsAction<InjectAction>() {
+) : InjectAction, ActionWrapper<InjectAction>() {
 
     override val host: InjectAction = this
 

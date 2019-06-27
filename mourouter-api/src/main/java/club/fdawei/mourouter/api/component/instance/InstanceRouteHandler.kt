@@ -23,7 +23,7 @@ class InstanceRouteHandler(info: HandleInfo) : RouteHandler(info) {
                 InstanceFactory.create(info.target)
             }
         } as? Instantiable
-        instantiable?.init(InitData(data.flags, data.extras))
+        instantiable?.init(InitContext.of(data.flags, data.extras))
         return instantiable
     }
 }

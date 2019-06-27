@@ -5,7 +5,7 @@ import club.fdawei.mourouter.api.action.InjectAction
 import club.fdawei.mourouter.api.action.InjectActionImpl
 import club.fdawei.mourouter.api.action.RouteAction
 import club.fdawei.mourouter.api.action.RouteActionImpl
-import club.fdawei.mourouter.api.base.DataContainer
+import club.fdawei.mourouter.api.base.TypeDataContainer
 import club.fdawei.mourouter.api.inject.InjectManager
 import club.fdawei.mourouter.api.log.DefaultLogger
 import club.fdawei.mourouter.api.log.ILogger
@@ -17,7 +17,7 @@ import club.fdawei.mourouter.api.route.Router
  */
 object MouRouter {
 
-    private var envs: DataContainer = DataContainer()
+    private var envs: TypeDataContainer = TypeDataContainer()
     private var router: Router
     private val injectManager: InjectManager
     private val providerLoader: ProviderLoader
@@ -37,8 +37,8 @@ object MouRouter {
     @JvmStatic
     fun init(context: Context) {
         addEnv(context)
-        this.router.loadRouteTable(providerLoader.provider)
-        this.injectManager.loadInjectInfo(providerLoader.provider)
+        router.loadRouteTable(providerLoader.provider)
+        injectManager.loadInjectInfo(providerLoader.provider)
     }
 
     @JvmStatic
