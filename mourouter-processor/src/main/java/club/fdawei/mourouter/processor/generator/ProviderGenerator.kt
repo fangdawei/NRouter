@@ -85,7 +85,7 @@ class ProviderGenerator(
         val service = getTypeMirror(TypeBox.SERVICE_NAME)
         val fragment = getTypeMirror(TypeBox.FRAGMENT_NAME)
         val v4fragment = getTypeMirror(TypeBox.V4_FRAGMENT_NAME)
-        val instantiable = getTypeMirror(TypeBox.INSTANTIABLE_NAME)
+        val creatable = getTypeMirror(TypeBox.CREATABLE_NAME)
         val routeHandler = getTypeMirror(TypeBox.ROUTE_HANDLER_NAME)
 
         funBuilder.addComment("register handler")
@@ -113,7 +113,7 @@ class ProviderGenerator(
                 isSubType(it.asType(), fragment) || isSubType(it.asType(), v4fragment) -> {
                     TypeBox.FRAGMENT_ROUTE_HANDLER
                 }
-                isSubType(it.asType(), instantiable) -> {
+                isSubType(it.asType(), creatable) -> {
                     TypeBox.INSTANCE_ROUTE_HANDLER
                 }
                 else -> {

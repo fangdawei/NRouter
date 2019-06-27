@@ -10,7 +10,7 @@ object TypeBox {
     const val SERVICE_NAME = "android.app.Service"
     const val FRAGMENT_NAME = "android.app.Fragment"
     const val V4_FRAGMENT_NAME = "android.support.v4.app.Fragment"
-    const val INSTANTIABLE_NAME = "club.fdawei.mourouter.api.component.instance.Instantiable"
+    const val CREATABLE_NAME = "club.fdawei.mourouter.api.component.instance.Creatable"
     const val ROUTE_HANDLER_NAME = "club.fdawei.mourouter.api.route.RouteHandler"
     const val AUTOWIRED_PROVIDER_NAME = "club.fdawei.mourouter.api.inject.AutowiredProvider"
 

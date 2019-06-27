@@ -22,8 +22,8 @@ class InstanceRouteHandler(info: HandleInfo) : RouteHandler(info) {
             else -> {
                 InstanceFactory.create(info.target)
             }
-        } as? Instantiable
-        instantiable?.init(InitContext.of(data.flags, data.extras))
+        } as? Creatable
+        instantiable?.init(Context.of(data.flags, data.extras))
         return instantiable
     }
 }
