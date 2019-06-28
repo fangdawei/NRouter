@@ -1,5 +1,7 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
+apply plugin: 'maven'
+apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -13,3 +15,32 @@ dependencies {
 
 sourceCompatibility = "8"
 targetCompatibility = "8"
+
+group = "$mourouter_lib_group"
+version = "$mourouter_lib_version"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri("${rootProject.localRepoPath}"))
+            pom.groupId = "$mourouter_lib_group"
+            pom.artifactId = "mourouter-processor"
+            pom.version = "$mourouter_lib_version"
+        }
+    }
+}
+
+publish {
+    repoName = 'maven'
+    userOrg = 'fangdawei'
+    groupId = "$mourouter_lib_group"
+    artifactId = 'mourouter-processor'
+    publishVersion = "$mourouter_lib_version"
+    desc = 'MouRouter'
+}
+
+tasks.withType(Javadoc) {//防止编码问题
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}

@@ -13,6 +13,8 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
 
+        classpath "com.novoda:bintray-release:$bintray_version"
+
         def localRepoDir = new File(rootProject.localRepoPath)
         if (localRepoDir.exists()) {
             classpath "club.fdawei.mourouter:mourouter-plugin:$mourouter_lib_version"

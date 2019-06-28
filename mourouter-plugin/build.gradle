@@ -1,5 +1,6 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
     compileOnly localGroovy()
@@ -23,4 +24,19 @@ uploadArchives {
             pom.version = "$mourouter_lib_version"
         }
     }
+}
+
+publish {
+    repoName = 'maven'
+    userOrg = 'fangdawei'
+    groupId = "$mourouter_lib_group"
+    artifactId = 'mourouter-plugin'
+    publishVersion = "$mourouter_lib_version"
+    desc = 'MouRouter'
+}
+
+tasks.withType(Javadoc) {//防止编码问题
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
 }
