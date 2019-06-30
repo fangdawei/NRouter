@@ -5,10 +5,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".CActivity">
+        tools:context="club.fdawei.nrouter.sample.subc.CActivity">
 
     <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="40dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -20,7 +20,7 @@
             android:text="C"/>
 
     <TextView
-            android:id="@+id/tv_mainpage_btn"
+            android:id="@+id/tvMainPageBtn"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
@@ -28,10 +28,10 @@
             android:gravity="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"/>
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
 
     <TextView
-            android:id="@+id/tv_apage_btn"
+            android:id="@+id/tvAPageBtn"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
@@ -39,10 +39,10 @@
             android:gravity="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_mainpage_btn"/>
+            app:layout_constraintTop_toBottomOf="@id/tvMainPageBtn"/>
 
     <TextView
-            android:id="@+id/tv_bpage_btn"
+            android:id="@+id/tvBPageBtn"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
@@ -50,6 +50,25 @@
             android:gravity="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_apage_btn"/>
+            app:layout_constraintTop_toBottomOf="@id/tvAPageBtn"/>
+
+    <TextView
+            android:id="@+id/tvFinishBtn"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:text="finish this"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBPageBtn"/>
+
+    <FrameLayout
+            android:id="@+id/flContainer"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

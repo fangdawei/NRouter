@@ -1,4 +1,4 @@
-include ':mourouter-annotation', ':mourouter-processor', ':mourouter-plugin', ':mourouter-api' , ':main', ':suba', ':subb', ':subc', ':base'
+include ':nrouter-annotation', ':nrouter-processor', ':nrouter-plugin', ':nrouter-api', ':main', ':suba', ':subb', ':subc', ':base'
 
 project(':base').projectDir = new File('sample/base')
 project(':main').projectDir = new File('sample/main')

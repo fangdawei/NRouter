@@ -1,0 +1,42 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'com.novoda.bintray-release'
+
+dependencies {
+    compileOnly localGroovy()
+    compileOnly gradleApi()
+    compileOnly "com.android.tools.build:gradle:$build_gradle_version"
+    implementation 'org.javassist:javassist:3.25.0-GA'
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
+
+group = "$nrouter_lib_group"
+version = "$nrouter_lib_version"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri("${rootProject.localRepoPath}"))
+            pom.groupId = "$nrouter_lib_group"
+            pom.artifactId = "nrouter-plugin"
+            pom.version = "$nrouter_lib_version"
+        }
+    }
+}
+
+publish {
+    repoName = 'maven'
+    userOrg = 'fangdawei'
+    groupId = "$nrouter_lib_group"
+    artifactId = 'nrouter-plugin'
+    publishVersion = "$nrouter_lib_version"
+    desc = 'NRouter'
+}
+
+tasks.withType(Javadoc) {//防止编码问题
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}

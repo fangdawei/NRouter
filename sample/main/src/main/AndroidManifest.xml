@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="club.fdawei.mourouter.sample.main">
+          package="club.fdawei.nrouter.sample.main">
 
     <application
-            android:name=".MainApplication"
+            android:name="club.fdawei.nrouter.sample.main.MainApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -13,12 +13,12 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <service
-                android:name=".MainService"
+                android:name="club.fdawei.nrouter.sample.main.MainService"
                 android:enabled="true"
                 android:exported="true">
         </service>
 
-        <activity android:name=".MainActivity">
+        <activity android:name="club.fdawei.nrouter.sample.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
