@@ -17,7 +17,7 @@ buildscript {
 
         def localRepoDir = new File(rootProject.localRepoPath)
         if (localRepoDir.exists()) {
-            classpath "club.fdawei.mourouter:mourouter-plugin:$mourouter_lib_version"
+            classpath "club.fdawei.nrouter:nrouter-plugin:$nrouter_lib_version"
         }
     }
 }

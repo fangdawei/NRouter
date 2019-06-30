@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 def localRepoDir = new File(rootProject.localRepoPath)
 if (localRepoDir.exists()) {
-    apply plugin: 'mourouter-plugin'
+    apply plugin: 'nrouter-plugin'
 }
 
 android {
@@ -40,7 +40,7 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
-    implementation project(':mourouter-annotation')
-    implementation project(':mourouter-api')
-    kapt project(':mourouter-processor')
+    implementation project(':nrouter-annotation')
+    implementation project(':nrouter-api')
+    kapt project(':nrouter-processor')
 }

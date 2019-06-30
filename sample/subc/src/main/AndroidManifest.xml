@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="club.fdawei.mourouter.sample.subc">
+          package="club.fdawei.nrouter.sample.subc">
 
     <application>
-        <activity android:name=".CActivity">
+        <activity android:name="club.fdawei.nrouter.sample.subc.CActivity">
         </activity>
     </application>
 

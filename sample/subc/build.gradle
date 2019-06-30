@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 def localRepoDir = new File(rootProject.localRepoPath)
 if (localRepoDir.exists()) {
-    apply plugin: 'mourouter-plugin'
+    apply plugin: 'nrouter-plugin'
 }
 
 android {
@@ -38,9 +38,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation project(':mourouter-annotation')
-    implementation project(':mourouter-api')
-    kapt project(':mourouter-processor')
+    implementation project(':nrouter-annotation')
+    implementation project(':nrouter-api')
+    kapt project(':nrouter-processor')
 
     implementation project(':base')
 }
