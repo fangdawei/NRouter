@@ -27,6 +27,7 @@ class InjectManager {
         return injectTable.getInjector(target::class)
     }
 
+    @Suppress("DEPRECATION")
     fun getProvider(source: Any): AutowiredProvider? {
         return injectTable.getProvider(source::class) ?: when (source) {
             is Activity -> {

@@ -2,11 +2,14 @@ package club.fdawei.nrouter.plugin
 
 import club.fdawei.nrouter.plugin.base.ProviderInfo
 import club.fdawei.nrouter.plugin.common.ClassInfo
+import club.fdawei.nrouter.plugin.log.PluginLogger
 import club.fdawei.nrouter.plugin.util.ClassUtils
 import com.android.build.api.transform.Format
+import com.android.build.api.transform.QualifiedContent
 import com.android.build.api.transform.TransformInvocation
 import com.android.utils.FileUtils
 import javassist.ClassPool
+import javassist.CtNewMethod
 
 import java.util.jar.JarFile
 
@@ -19,7 +22,7 @@ class TransformHandler {
 
     private TransformInvocation invocation
     private ClassPool classPool = new ClassPool(true)
-    private ProviderInfo appProviderInfo
+    private File projectClassesDir = null
     private List<ProviderInfo> providerList = new LinkedList<>()
 
     TransformHandler(TransformInvocation invocation) {
@@ -29,34 +32,43 @@ class TransformHandler {
     void transform() {
         invocation.inputs.each {
             it.directoryInputs.each { dir ->
+                PluginLogger.i("transform", "${dir.scopes}, ${dir.file.absolutePath}, ${dir.contentTypes}")
                 classPool.appendClassPath(dir.file.absolutePath)
                 collectInDir(dir.file)
+
+                if (projectClassesDir == null && dir.scopes.contains(QualifiedContent.Scope.PROJECT)) {
+                    projectClassesDir = dir.file
+                }
             }
             it.jarInputs.each { jar ->
+                PluginLogger.i("transform", "${jar.scopes}, ${jar.file.absolutePath}, ${jar.contentTypes}")
                 classPool.appendClassPath(jar.file.absolutePath)
                 collectInJar(jar.file)
             }
         }
 
-        if (appProviderInfo != null && !providerList.empty) {
-            def appProvider = classPool.getCtClass(appProviderInfo.name)
+        if (projectClassesDir != null) {
+            def multiProvider = classPool.getCtClass(ClassInfo.MultiProvider.NAME)
+            def absAppProvider = classPool.getCtClass(ClassInfo.AbsAppProvider.NAME)
+            def appProvider = classPool.makeClass(ClassInfo.AppProvider.NAME, absAppProvider)
             if (appProvider.frozen) {
                 appProvider.defrost()
             }
-            def initProvidersMethod = appProvider.getDeclaredMethod(ClassInfo.AbsAppProvider.METHOD_INIT_PROVIDERS)
-            def routeProvider = classPool.getCtClass(ClassInfo.MultiProvider.NAME)
-            def srcBuilder = new StringBuilder()
-            srcBuilder.append('{')
+            def methodSrcBuilder = new StringBuilder("public final void " +
+                    "${ClassInfo.AbsAppProvider.METHOD_INIT_PROVIDERS}()")
+            methodSrcBuilder.append('{')
             providerList.each {
                 def clazz = classPool.getCtClass(it.name)
                 def interfaces = clazz.interfaces
-                if (interfaces != null && interfaces.contains(routeProvider)) {
-                    srcBuilder.append("${ClassInfo.AbsAppProvider.METHOD_ADD_PROVIDER}(new ${it.name}());")
+                if (interfaces != null && interfaces.contains(multiProvider)) {
+                    methodSrcBuilder.append("${ClassInfo.AbsAppProvider.METHOD_ADD_PROVIDER}(new ${it.name}());")
                 }
             }
-            srcBuilder.append('}')
-            initProvidersMethod.setBody(srcBuilder.toString())
-            appProvider.writeFile(appProviderInfo.dir.absolutePath)
+            methodSrcBuilder.append('}')
+            appProvider.addMethod(CtNewMethod.make(methodSrcBuilder.toString(), appProvider))
+            appProvider.writeFile(projectClassesDir.absolutePath)
+
+            PluginLogger.i("", "create class ${ClassInfo.MultiProvider.NAME}")
         }
 
         invocation.inputs.each {
@@ -79,9 +91,8 @@ class TransformHandler {
                 def relativePath = FileUtils.relativePath(it, dir)
                 def className = ClassUtils.getClassName(relativePath)
                 if (ClassInfo.ModuleProvider.isModuleProvider(relativePath)) {
+                    PluginLogger.i("", "${className}")
                     providerList.add(new ProviderInfo(dir, className))
-                } else if (ClassInfo.AppProvider.NAME == className) {
-                    appProviderInfo = new ProviderInfo(dir, className)
                 }
             }
         }
@@ -97,6 +108,7 @@ class TransformHandler {
             }
             if (ClassInfo.ModuleProvider.isModuleProvider(jarEntry.name)) {
                 def className = ClassUtils.getClassName(jarEntry.name)
+                PluginLogger.i("", "${className}")
                 providerList.add(new ProviderInfo(jar, className))
             }
         }
