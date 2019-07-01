@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
  * Created by david on 2019/06/04.
  */
 class FragmentAutowiredProvider : AutowiredProvider() {
-    @Suppress("UNCHECKED_CAST")
+    @Suppress("UNCHECKED_CAST", "DEPRECATION")
     override fun <T : Any> getAutowired(source: Any, name: String, type: KClass<T>, data: club.fdawei.nrouter.api.action.ActionData): T? {
         var arguments: Bundle? = null
         val isFragment = when (source) {

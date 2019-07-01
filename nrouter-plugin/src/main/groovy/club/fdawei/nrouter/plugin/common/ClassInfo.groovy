@@ -6,6 +6,7 @@ package club.fdawei.nrouter.plugin.common
 final class ClassInfo {
 
     final static class AbsAppProvider {
+        static final String NAME = 'club.fdawei.nrouter.api.provider.AbsAppProvider'
         static final String METHOD_INIT_PROVIDERS = 'initProviders'
         static final String METHOD_ADD_PROVIDER = 'addProvider'
     }

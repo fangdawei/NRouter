@@ -13,7 +13,7 @@ class NRouterTransform extends Transform {
 
     @Override
     String getName() {
-        return 'NRouterTransform'
+        return 'nRouter'
     }
 
     @Override

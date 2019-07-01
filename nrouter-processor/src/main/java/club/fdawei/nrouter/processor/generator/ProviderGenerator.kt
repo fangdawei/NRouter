@@ -26,7 +26,6 @@ class ProviderGenerator(
     private val interceptorElements = mutableListOf<TypeElement>()
     private val providerElements = mutableListOf<TypeElement>()
     private val autowiredElements = mutableMapOf<TypeElement, MutableList<VariableElement>>()
-    private var appProviderCreated = false
 
     fun addRouteWith(element: TypeElement) {
         routeElements.add(element)
@@ -202,27 +201,7 @@ class ProviderGenerator(
         return funBuilder.build()
     }
 
-    private fun buildAppProvider(name: String): TypeSpec {
-        val funBuilder = FunSpec.builder(ClassInfo.AbsAppProvider.FUN_INIT_PROVIDERS)
-            .addModifiers(KModifier.FINAL, KModifier.OVERRIDE)
-        return TypeSpec.classBuilder(name)
-            .superclass(TypeBox.ABS_APP_PROVIDER)
-            .addFunction(funBuilder.build())
-            .build()
-    }
-
     fun genKtFile(filer: Filer) {
-        if (context.isAppModule && !appProviderCreated) {
-            FileSpec.builder(
-                ClassInfo.PROVIDER_PACKAGE,
-                ClassInfo.APP_PROVIDER_NAME
-            )
-                .addType(buildAppProvider(ClassInfo.APP_PROVIDER_NAME))
-                .addComment("Generated automatically by NRouter. Do not modify!")
-                .build()
-                .writeTo(filer)
-            appProviderCreated = true
-        }
         if (routeElements.isNotEmpty() ||
             interceptorElements.isNotEmpty() ||
             providerElements.isNotEmpty()
