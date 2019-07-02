@@ -48,7 +48,7 @@ class InjectorGenerator(
             )
             .addParameter(
                 ClassInfo.Injector.FUN_ARG_DATA,
-                TypeBox.ACTION_DATA
+                TypeBox.ACTION_BUNDLE
             )
         funBuilder.beginControlFlow(
             "if (${ClassInfo.Injector.FUN_ARG_TARGET} !is %T)",

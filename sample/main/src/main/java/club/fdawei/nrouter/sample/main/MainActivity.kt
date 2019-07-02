@@ -9,10 +9,11 @@ import club.fdawei.nrouter.annotation.Route
 import club.fdawei.nrouter.api.NRouter
 import club.fdawei.nrouter.api.component.activity.ActivityOption
 import club.fdawei.nrouter.api.component.activity.RequestCode
+import club.fdawei.nrouter.sample.base.IPageLogger
 import club.fdawei.nrouter.sample.base.service.IService
 import kotlinx.android.synthetic.main.activity_main.*
 
-@Route(path = "/main/page/home")
+@Route(path = "/main/page/home", desc = "Home页面")
 class MainActivity : AppCompatActivity() {
 
     @Autowired(name = "/subc/service/cservice")
@@ -50,7 +51,13 @@ class MainActivity : AppCompatActivity() {
             cService?.printName()
         }
 
+        tvPageLog.setOnClickListener {
+            NRouter.instance().get(IPageLogger::class)?.printLog()
+        }
+
         NRouter.injector().inject(this)
+
+        NRouter.instance().get(IPageLogger::class)?.logPage("MainActivity")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

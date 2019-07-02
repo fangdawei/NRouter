@@ -5,9 +5,10 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import club.fdawei.nrouter.annotation.Route
 import club.fdawei.nrouter.api.NRouter
+import club.fdawei.nrouter.sample.base.IPageLogger
 import kotlinx.android.synthetic.main.activity_c.*
 
-@Route(path = "/subc/page/home")
+@Route(path = "/subc/page/home", desc = "C页面")
 class CActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,5 +42,6 @@ class CActivity : AppCompatActivity() {
                 .commit()
         }
 
+        NRouter.instance().get(IPageLogger::class)?.logPage("CActivity")
     }
 }

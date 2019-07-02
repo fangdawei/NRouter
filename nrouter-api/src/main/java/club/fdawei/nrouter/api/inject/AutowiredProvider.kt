@@ -1,7 +1,7 @@
 package club.fdawei.nrouter.api.inject
 
 import club.fdawei.nrouter.api.NRouter
-import club.fdawei.nrouter.api.action.ActionData
+import club.fdawei.nrouter.api.action.ActionBundle
 import kotlin.reflect.KClass
 
 /**
@@ -12,11 +12,11 @@ open class AutowiredProvider {
         source: Any,
         name: String,
         type: KClass<T>,
-        data: ActionData
+        data: ActionBundle
     ): T? {
         return NRouter.route(name)
             .env(data.envs)
-            .withBundle(data.extras)
+            .withData(data.extras)
             .withFlags(data.flags)
             .get(type)
     }

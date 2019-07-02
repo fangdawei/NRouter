@@ -8,10 +8,11 @@ import android.support.v7.app.AppCompatActivity
 import club.fdawei.nrouter.annotation.Route
 import club.fdawei.nrouter.api.NRouter
 import club.fdawei.nrouter.api.component.service.ServiceOption
+import club.fdawei.nrouter.sample.base.IPageLogger
 import club.fdawei.nrouter.sample.base.service.ServiceBinder
 import kotlinx.android.synthetic.main.activity_b.*
 
-@Route(path = "/subb/page/home")
+@Route(path = "/subb/page/home", desc = "B页面")
 class BActivity : AppCompatActivity() {
 
     private val conn = object : ServiceConnection {
@@ -22,7 +23,6 @@ class BActivity : AppCompatActivity() {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             srvBinder = service as ServiceBinder
         }
-
     }
     private var srvBinder: ServiceBinder? = null
 
@@ -45,6 +45,8 @@ class BActivity : AppCompatActivity() {
         tvMainServiceBtn.setOnClickListener {
             srvBinder?.printName()
         }
+
+        NRouter.instance().get(IPageLogger::class)?.logPage("BActivity")
     }
 
     override fun onStart() {

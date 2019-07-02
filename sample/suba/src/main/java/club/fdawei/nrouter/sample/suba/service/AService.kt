@@ -2,7 +2,7 @@ package club.fdawei.nrouter.sample.suba.service
 
 import android.util.Log
 import club.fdawei.nrouter.annotation.Route
-import club.fdawei.nrouter.api.component.instance.Creatable
+import club.fdawei.nrouter.api.component.creatable.Creatable
 import club.fdawei.nrouter.sample.base.service.IService
 
 /**

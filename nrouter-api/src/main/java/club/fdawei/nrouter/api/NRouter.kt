@@ -1,12 +1,10 @@
 package club.fdawei.nrouter.api
 
 import android.content.Context
-import club.fdawei.nrouter.api.action.InjectAction
-import club.fdawei.nrouter.api.action.InjectActionImpl
-import club.fdawei.nrouter.api.action.RouteAction
-import club.fdawei.nrouter.api.action.RouteActionImpl
+import club.fdawei.nrouter.api.action.*
 import club.fdawei.nrouter.api.base.TypeDataContainer
 import club.fdawei.nrouter.api.inject.InjectManager
+import club.fdawei.nrouter.api.instance.InstanceManager
 import club.fdawei.nrouter.api.log.DefaultLogger
 import club.fdawei.nrouter.api.log.ILogger
 import club.fdawei.nrouter.api.provider.ProviderLoader
@@ -19,8 +17,9 @@ object NRouter {
 
     private var envs: TypeDataContainer = TypeDataContainer()
     private var router: Router
-    private val injectManager: InjectManager
-    private val providerLoader: ProviderLoader
+    private val injectManager = InjectManager()
+    private val providerLoader = ProviderLoader()
+    private val instanceManager = InstanceManager()
 
     @JvmField
     var debug: Boolean = false
@@ -30,8 +29,6 @@ object NRouter {
 
     init {
         router = Router(envs)
-        injectManager = InjectManager()
-        providerLoader = ProviderLoader()
     }
 
     @JvmStatic
@@ -60,5 +57,10 @@ object NRouter {
         }, {
             injectManager.getProvider(it)
         })
+    }
+
+    @JvmStatic
+    fun instance(): InstanceAction {
+        return instanceManager
     }
 }

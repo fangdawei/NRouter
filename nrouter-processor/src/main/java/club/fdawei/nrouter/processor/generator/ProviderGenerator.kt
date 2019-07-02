@@ -90,11 +90,12 @@ class ProviderGenerator(
         val creatable = getTypeMirror(TypeBox.CREATABLE_NAME)
         val routeHandler = getTypeMirror(TypeBox.ROUTE_HANDLER_NAME)
 
-        funBuilder.addComment("register handler")
+        funBuilder.addComment("register route node")
         routeElements.forEach {
             val route = it.getAnnotation(Route::class.java)
             val path = route.path
             val flags = route.flags
+            val desc = route.desc
             val handlerValue = it.annotationValue(
                 Route::class,
                 ClassInfo.Route.VAL_HANDLER
@@ -119,7 +120,7 @@ class ProviderGenerator(
                     TypeBox.FRAGMENT_ROUTE_HANDLER
                 }
                 isSubType(it.asType(), creatable) -> {
-                    TypeBox.INSTANCE_ROUTE_HANDLER
+                    TypeBox.CREATABLE_ROUTE_HANDLER
                 }
                 else -> {
                     null
@@ -128,9 +129,9 @@ class ProviderGenerator(
             if (handler != null) {
                 FunSpec
                 funBuilder.addStatement(
-                    "${ClassInfo.MultiProvider.FUN_ARG_ROUTE_TABLE}.${ClassInfo.RouteTable.FUN_REGISTER_HANDLER}" +
-                            "(%T(%S, %T::class, %L, {%T(it)}))",
-                    TypeBox.HANDLER_META_DATA, path, it.asType(), flags, handler
+                    "${ClassInfo.MultiProvider.FUN_ARG_ROUTE_TABLE}.${ClassInfo.RouteTable.FUN_REGISTER_ROUTE_NODE}" +
+                            "(%T(%S, %T::class, %L, %S, {%T(it)}))",
+                    TypeBox.ROUTE_NODE_META_DATA, path, it.asType(), flags, desc, handler
                 )
             }
         }

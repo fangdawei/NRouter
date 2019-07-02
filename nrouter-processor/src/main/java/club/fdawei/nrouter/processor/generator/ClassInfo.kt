@@ -8,7 +8,6 @@ object ClassInfo {
     const val PROVIDER_PACKAGE = "club.fdawei.nrouter.providers"
     const val PROVIDER_NAME_PREFIX = "Module_"
     const val PROVIDER_NAME_SUFFIX = "_Provider"
-    const val APP_PROVIDER_NAME = "App_Provider"
     const val INJECTOR_NAME_SUFFIX = "_Injector"
 
     object Route {
@@ -20,7 +19,7 @@ object ClassInfo {
     }
 
     object RouteTable {
-        const val FUN_REGISTER_HANDLER = "registerHandler"
+        const val FUN_REGISTER_ROUTE_NODE = "registerRouteNode"
         const val FUN_REGISTER_INTERCEPTOR = "registerInterceptor"
     }
 
@@ -33,10 +32,6 @@ object ClassInfo {
         const val FUN_PROVIDE_NAME = "provide"
         const val FUN_ARG_ROUTE_TABLE = "routeTable"
         const val FUN_ARG_INJECT_TABLE = "injectTable"
-    }
-
-    object AbsAppProvider {
-        const val FUN_INIT_PROVIDERS = "initProviders"
     }
 
     object AutowiredProvider {

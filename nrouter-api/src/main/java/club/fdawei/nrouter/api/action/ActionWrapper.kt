@@ -7,7 +7,7 @@ import club.fdawei.nrouter.api.base.TypeDataContainer
 /**
  * Created by david on 2019/06/04.
  */
-abstract class ActionWrapper<H> : Action<H>, ActionData {
+abstract class ActionWrapper<H> : Action<H>, ActionBundle {
 
     abstract val host: H
     override var flags = 0
@@ -31,7 +31,7 @@ abstract class ActionWrapper<H> : Action<H>, ActionData {
         return host
     }
 
-    override fun withBundle(bundle: Bundle): H {
+    override fun withData(bundle: Bundle): H {
         this.extras.putAll(bundle)
         return host
     }

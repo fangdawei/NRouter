@@ -1,4 +1,4 @@
-package club.fdawei.nrouter.api.component.instance
+package club.fdawei.nrouter.api.component.creatable
 
 /**
  * Create by david on 2019/06/02.

@@ -14,7 +14,6 @@ import club.fdawei.nrouter.api.util.parseRoutePath
 class Router(
     private val baseEnvs: TypeDataContainer
 ) {
-
     private val routeTable = RouteTable()
 
     fun loadRouteTable(provider: MultiProvider?) {
@@ -29,7 +28,7 @@ class Router(
         args.forEach { (k, v) -> action.withString(k, v) }
         action.env(baseEnvs)
         val routeResult = routeTable.addressing(path)
-        val handler = routeResult.handlerMetaData?.handler
+        val handler = routeResult.routeNodeMetaData?.handler
         val sortedInterceptors = routeResult.sortedInterceptors
         return InterceptInvoker(sortedInterceptors).invoke(action, handler)
     }

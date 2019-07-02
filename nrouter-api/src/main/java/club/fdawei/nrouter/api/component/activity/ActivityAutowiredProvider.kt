@@ -1,6 +1,7 @@
 package club.fdawei.nrouter.api.component.activity
 
 import android.app.Activity
+import club.fdawei.nrouter.api.action.ActionBundle
 import club.fdawei.nrouter.api.inject.AutowiredProvider
 import club.fdawei.nrouter.api.util.isRoutePath
 import kotlin.reflect.KClass
@@ -10,7 +11,12 @@ import kotlin.reflect.KClass
  */
 class ActivityAutowiredProvider : AutowiredProvider() {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : Any> getAutowired(source: Any, name: String, type: KClass<T>, data: club.fdawei.nrouter.api.action.ActionData): T? {
+    override fun <T : Any> getAutowired(
+        source: Any,
+        name: String,
+        type: KClass<T>,
+        data: ActionBundle
+    ): T? {
         if (source !is Activity) {
             return null
         }

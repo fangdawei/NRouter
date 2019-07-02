@@ -3,15 +3,15 @@ package club.fdawei.nrouter.api.component.activity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import club.fdawei.nrouter.api.route.NodeInfo
+import club.fdawei.nrouter.api.route.RouteNodeInfo
 import club.fdawei.nrouter.api.route.RouteHandler
 import club.fdawei.nrouter.api.util.ExceptionUtils
 
 /**
  * Created by david on 2019/05/30.
  */
-class ActivityRouteHandler(info: NodeInfo) : RouteHandler(info) {
-    override fun go(data: club.fdawei.nrouter.api.action.RouteActionData) {
+class ActivityRouteHandler(info: RouteNodeInfo) : RouteHandler(info) {
+    override fun go(data: club.fdawei.nrouter.api.action.RouteActionBundle) {
         if (info == null) {
             ExceptionUtils.exception("info is required ,but Null!")
             return

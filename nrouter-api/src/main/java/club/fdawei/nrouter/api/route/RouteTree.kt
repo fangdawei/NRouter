@@ -15,7 +15,7 @@ open class RouteTree(
         if (prePath.endsWith(ROUTE_PATH_SEPARATOR)) "$prePath$key"
         else "$prePath$ROUTE_PATH_SEPARATOR$key"
     }
-    protected var handlerMetaData: HandlerMetaData? = null
+    protected var routeNodeMetaData: RouteNodeMetaData? = null
     protected val interceptors = LinkedList<InterceptorMetaData>()
     protected val childTrees: MutableMap<String, RouteTree> by lazy { mutableMapOf<String, RouteTree>() }
 
@@ -30,19 +30,19 @@ open class RouteTree(
         }
     }
 
-    fun addHandler(path: List<String>, handlerMetaData: HandlerMetaData) {
+    fun addHandler(path: List<String>, routeNodeMetaData: RouteNodeMetaData) {
         if (path.isEmpty()) {
-            if (this.handlerMetaData != null) {
+            if (this.routeNodeMetaData != null) {
                 ExceptionUtils.exception(
-                    "${this.handlerMetaData!!.target.qualifiedName} and " +
-                            "${handlerMetaData.target.qualifiedName} with same path"
+                    "${this.routeNodeMetaData!!.target.qualifiedName} and " +
+                            "${routeNodeMetaData.target.qualifiedName} with same path"
                 )
             }
-            this.handlerMetaData = handlerMetaData
+            this.routeNodeMetaData = routeNodeMetaData
         } else {
             val childKey = path[0]
             val childTree = getOrCreateChildTree(childKey)
-            childTree.addHandler(path.subList(1, path.size), handlerMetaData)
+            childTree.addHandler(path.subList(1, path.size), routeNodeMetaData)
         }
     }
 
@@ -56,9 +56,9 @@ open class RouteTree(
         }
     }
 
-    fun addressing(path: List<String>, interceptors: MutableList<InterceptorMetaData>): HandlerMetaData? {
+    fun addressing(path: List<String>, interceptors: MutableList<InterceptorMetaData>): RouteNodeMetaData? {
         val result = if (path.isEmpty()) {
-            handlerMetaData
+            routeNodeMetaData
         } else {
             childTrees[path[0]]?.addressing(path.subList(1, path.size), interceptors)
         }
@@ -68,8 +68,8 @@ open class RouteTree(
 
     open fun print(): String {
         val builder = StringBuilder()
-        if (handlerMetaData != null || interceptors.isNotEmpty()) {
-            builder.append("\n$childPrePath -> handler=$handlerMetaData; interceptors=$interceptors")
+        if (routeNodeMetaData != null || interceptors.isNotEmpty()) {
+            builder.append("\n$childPrePath -> $routeNodeMetaData; interceptors=$interceptors")
         }
         childTrees.forEach { (_, data) ->
             builder.append(data.print())

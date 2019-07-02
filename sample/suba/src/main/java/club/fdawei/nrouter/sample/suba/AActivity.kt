@@ -5,9 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import club.fdawei.nrouter.annotation.Route
 import club.fdawei.nrouter.api.NRouter
 import club.fdawei.nrouter.api.component.service.ServiceOption
+import club.fdawei.nrouter.sample.base.IPageLogger
 import kotlinx.android.synthetic.main.activity_a.*
 
-@Route(path = "/suba/page/home")
+@Route(path = "/suba/page/home", desc = "A页面")
 class AActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,5 +34,7 @@ class AActivity : AppCompatActivity() {
         tvStopMainService.setOnClickListener {
             NRouter.route("/main/service/main").env(ServiceOption.STOP).go()
         }
+
+        NRouter.instance().get(IPageLogger::class)?.logPage("AActivity")
     }
 }

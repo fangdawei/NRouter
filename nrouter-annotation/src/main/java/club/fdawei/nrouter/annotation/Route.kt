@@ -10,5 +10,6 @@ import kotlin.reflect.KClass
 annotation class Route(
     val path: String,
     val flags: Int = 0,
+    val desc: String = "",
     val handler: KClass<out Any> = Any::class
 )

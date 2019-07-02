@@ -7,26 +7,26 @@ import kotlin.reflect.KClass
  */
 class TypeDataContainer {
 
-    private val datas = linkedMapOf<KClass<out Any>, Any>()
+    private val dataMap = linkedMapOf<KClass<out Any>, Any>()
 
     fun put(value: Any) {
-        datas[value::class] = value
+        dataMap[value::class] = value
     }
 
     fun putAll(other: TypeDataContainer) {
-        other.datas.forEach { (_, value) ->
+        other.dataMap.forEach { (_, value) ->
             put(value)
         }
     }
 
     @Suppress("UNCHECKED_CAST")
     fun <T : Any> get(kClass: KClass<T>, assignable: Boolean = false): T? {
-        val env = datas[kClass]
+        val env = dataMap[kClass]
         return if (env != null) {
             env as T
         } else {
             if (assignable) {
-                for (value in datas.values) {
+                for (value in dataMap.values) {
                     if (kClass.isInstance(value)) {
                         return value as T
                     }
@@ -40,7 +40,7 @@ class TypeDataContainer {
 
     fun remove(kClass: KClass<Any>, assignable: Boolean = false) {
         if (assignable) {
-            val iterator = datas.iterator()
+            val iterator = dataMap.iterator()
             while (iterator.hasNext()) {
                 val entry = iterator.next()
                 if (kClass.isInstance(entry.value)) {
@@ -48,11 +48,11 @@ class TypeDataContainer {
                 }
             }
         } else {
-            datas.remove(kClass)
+            dataMap.remove(kClass)
         }
     }
 
     fun clear() {
-        datas.clear()
+        dataMap.clear()
     }
 }

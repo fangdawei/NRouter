@@ -1,13 +1,13 @@
 package club.fdawei.nrouter.api.route
 
-import club.fdawei.nrouter.api.action.RouteActionData
+import club.fdawei.nrouter.api.action.RouteActionBundle
 
 /**
  * Created by david on 2019/05/31.
  */
 class InterceptInvocation(
     private val interceptors: List<RouteInterceptor>,
-    val data: RouteActionData
+    val data: RouteActionBundle
 ) {
     var routeHandler: RouteHandler? = null
     val iterator: Iterator<RouteInterceptor> by lazy { interceptors.iterator() }
