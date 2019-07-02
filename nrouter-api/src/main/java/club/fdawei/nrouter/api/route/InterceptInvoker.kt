@@ -1,6 +1,6 @@
 package club.fdawei.nrouter.api.route
 
-import club.fdawei.nrouter.api.action.RouteActionData
+import club.fdawei.nrouter.api.action.RouteActionBundle
 
 /**
  * Create by david on 2019/06/01.
@@ -8,7 +8,7 @@ import club.fdawei.nrouter.api.action.RouteActionData
 class InterceptInvoker(
     private val interceptors: List<RouteInterceptor>
 ) {
-    fun invoke(actionData: RouteActionData, origin: RouteHandler?): RouteHandler? {
+    fun invoke(actionData: RouteActionBundle, origin: RouteHandler?): RouteHandler? {
         val invocation = InterceptInvocation(interceptors, actionData)
         invocation.routeHandler = origin
         invocation.next()

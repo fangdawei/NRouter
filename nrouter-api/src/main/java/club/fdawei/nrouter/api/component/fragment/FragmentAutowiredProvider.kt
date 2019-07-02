@@ -1,6 +1,7 @@
 package club.fdawei.nrouter.api.component.fragment
 
 import android.os.Bundle
+import club.fdawei.nrouter.api.action.ActionBundle
 import club.fdawei.nrouter.api.inject.AutowiredProvider
 import kotlin.reflect.KClass
 
@@ -9,7 +10,12 @@ import kotlin.reflect.KClass
  */
 class FragmentAutowiredProvider : AutowiredProvider() {
     @Suppress("UNCHECKED_CAST", "DEPRECATION")
-    override fun <T : Any> getAutowired(source: Any, name: String, type: KClass<T>, data: club.fdawei.nrouter.api.action.ActionData): T? {
+    override fun <T : Any> getAutowired(
+        source: Any,
+        name: String,
+        type: KClass<T>,
+        data: ActionBundle
+    ): T? {
         var arguments: Bundle? = null
         val isFragment = when (source) {
             is android.app.Fragment -> {

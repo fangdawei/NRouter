@@ -1,18 +1,18 @@
 package club.fdawei.nrouter.api.route
 
-import club.fdawei.nrouter.api.action.RouteActionData
+import club.fdawei.nrouter.api.action.RouteActionBundle
 
 /**
  * Create by david on 2019/05/30.
  */
 abstract class RouteHandler(
-    val info: NodeInfo?
+    val info: RouteNodeInfo?
 ) {
-    open fun go(data: RouteActionData) {
+    open fun go(data: RouteActionBundle) {
 
     }
 
-    open fun get(data: RouteActionData): Any? {
+    open fun get(data: RouteActionBundle): Any? {
         return null
     }
 }

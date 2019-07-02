@@ -1,4 +1,4 @@
-package club.fdawei.nrouter.api.component.instance
+package club.fdawei.nrouter.api.component.creatable
 
 import android.os.Bundle
 

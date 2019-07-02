@@ -5,18 +5,19 @@ import kotlin.reflect.KClass
 /**
  * Created by david on 2019/05/27.
  */
-class HandlerMetaData(
+class RouteNodeMetaData(
     val path: String,
     val target: KClass<out Any>,
     val flags: Int,
-    private val getHandler: (NodeInfo) -> RouteHandler
+    val desc: String,
+    private val getHandler: (RouteNodeInfo) -> RouteHandler
 ) {
     val handler: RouteHandler by lazy {
-        getHandler.invoke(NodeInfo(target, flags))
+        getHandler.invoke(RouteNodeInfo(target, flags))
     }
 
     override fun toString(): String {
-        return "{" +
+        return "$desc{" +
                 "path='$path', " +
                 "target=${target.qualifiedName}, " +
                 "flags=$flags, " +

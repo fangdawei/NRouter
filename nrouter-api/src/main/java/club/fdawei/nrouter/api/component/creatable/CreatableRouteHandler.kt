@@ -1,7 +1,7 @@
-package club.fdawei.nrouter.api.component.instance
+package club.fdawei.nrouter.api.component.creatable
 
-import club.fdawei.nrouter.api.action.RouteActionData
-import club.fdawei.nrouter.api.route.NodeInfo
+import club.fdawei.nrouter.api.action.RouteActionBundle
+import club.fdawei.nrouter.api.route.RouteNodeInfo
 import club.fdawei.nrouter.api.route.RouteHandler
 import club.fdawei.nrouter.api.util.ExceptionUtils
 import club.fdawei.nrouter.api.util.withFlag
@@ -9,8 +9,8 @@ import club.fdawei.nrouter.api.util.withFlag
 /**
  * Created by david on 2019/05/30.
  */
-class InstanceRouteHandler(info: NodeInfo) : RouteHandler(info) {
-    override fun get(data: RouteActionData): Any? {
+class CreatableRouteHandler(info: RouteNodeInfo) : RouteHandler(info) {
+    override fun get(data: RouteActionBundle): Any? {
         if (info == null) {
             ExceptionUtils.exception("info is required ,but Null!")
             return null
@@ -20,7 +20,7 @@ class InstanceRouteHandler(info: NodeInfo) : RouteHandler(info) {
                 SingletonRepository.getOrCreate(info.target)
             }
             else -> {
-                InstanceFactory.create(info.target)
+                CreatableFactory.create(info.target)
             }
         } as? Creatable
         instantiable?.init(Context.of(data.flags, data.extras))

@@ -62,4 +62,15 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvCPageBtn"/>
 
+    <TextView
+            android:id="@+id/tvPageLog"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:text="print page log"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvServiceBtn"/>
+
 </android.support.constraint.ConstraintLayout>

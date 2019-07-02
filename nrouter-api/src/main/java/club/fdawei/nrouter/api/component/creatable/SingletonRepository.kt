@@ -1,4 +1,4 @@
-package club.fdawei.nrouter.api.component.instance
+package club.fdawei.nrouter.api.component.creatable
 
 import kotlin.reflect.KClass
 
@@ -15,7 +15,7 @@ object SingletonRepository {
 
     fun getOrCreate(kClass: KClass<out Any>): Any? {
         return get(kClass) ?: synchronized(instanceMap) {
-            get(kClass) ?: InstanceFactory.create(kClass).apply {
+            get(kClass) ?: CreatableFactory.create(kClass).apply {
                 if (this != null) {
                     put(kClass, this)
                 }

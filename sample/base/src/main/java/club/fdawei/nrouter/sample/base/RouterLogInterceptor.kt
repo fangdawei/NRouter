@@ -1,4 +1,4 @@
-package club.fdawei.nrouter.sample.base.service
+package club.fdawei.nrouter.sample.base
 
 import android.util.Log
 import club.fdawei.nrouter.annotation.Interceptor

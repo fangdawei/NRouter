@@ -1,4 +1,4 @@
-package club.fdawei.nrouter.api.component.instance
+package club.fdawei.nrouter.api.component.creatable
 
 import club.fdawei.nrouter.api.util.ExceptionUtils
 import kotlin.reflect.KClass
@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 /**
  * Create by david on 2019/06/02.
  */
-object InstanceFactory {
+object CreatableFactory {
     fun create(kClass: KClass<out Any>): Any? {
         return try {
             kClass.java.newInstance()

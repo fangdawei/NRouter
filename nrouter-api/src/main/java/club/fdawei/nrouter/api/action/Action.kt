@@ -13,9 +13,10 @@ interface Action<H> {
 
     fun env(container: TypeDataContainer): H
 
+
     fun withFlags(vararg flag: Int): H
 
-    fun withBundle(bundle: Bundle): H
+    fun withData(bundle: Bundle): H
 
     fun withString(k: String, v: String): H
 
@@ -29,7 +30,7 @@ interface Action<H> {
 
     fun withBoolean(k: String, v: Boolean): H
 
-    fun withParcelable(k: String, v: Parcelable) : H
+    fun withParcelable(k: String, v: Parcelable): H
 
     fun withParcelableArrayList(k: String, v: ArrayList<out Parcelable>): H
 }

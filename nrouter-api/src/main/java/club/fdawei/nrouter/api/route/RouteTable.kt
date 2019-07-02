@@ -8,13 +8,13 @@ import club.fdawei.nrouter.api.util.splitRoutePath
  */
 class RouteTable : RouteTree("", "") {
 
-    fun registerHandler(handlerMetaData: HandlerMetaData) {
-        if (handlerMetaData.path.isEmpty()) {
-            ExceptionUtils.exception("Path illegal, $handlerMetaData")
+    fun registerRouteNode(routeNodeMetaData: RouteNodeMetaData) {
+        if (routeNodeMetaData.path.isEmpty()) {
+            ExceptionUtils.exception("Path illegal, $routeNodeMetaData")
             return
         }
-        val pathSplitList = handlerMetaData.path.splitRoutePath()
-        addHandler(pathSplitList, handlerMetaData)
+        val pathSplitList = routeNodeMetaData.path.splitRoutePath()
+        addHandler(pathSplitList, routeNodeMetaData)
     }
 
     fun registerInterceptor(interceptor: InterceptorMetaData) {

@@ -10,7 +10,7 @@ object TypeBox {
     const val SERVICE_NAME = "android.app.Service"
     const val FRAGMENT_NAME = "android.app.Fragment"
     const val V4_FRAGMENT_NAME = "android.support.v4.app.Fragment"
-    const val CREATABLE_NAME = "club.fdawei.nrouter.api.component.instance.Creatable"
+    const val CREATABLE_NAME = "club.fdawei.nrouter.api.component.creatable.Creatable"
     const val ROUTE_HANDLER_NAME = "club.fdawei.nrouter.api.route.RouteHandler"
     const val AUTOWIRED_PROVIDER_NAME = "club.fdawei.nrouter.api.inject.AutowiredProvider"
 
@@ -30,8 +30,8 @@ object TypeBox {
         "club.fdawei.nrouter.api.provider.AbsAppProvider"
     )
 
-    val HANDLER_META_DATA = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.route.HandlerMetaData"
+    val ROUTE_NODE_META_DATA = ClassName.bestGuess(
+        "club.fdawei.nrouter.api.route.RouteNodeMetaData"
     )
 
     val INTERCEPTOR_META_DATA = ClassName.bestGuess(
@@ -50,8 +50,8 @@ object TypeBox {
         "club.fdawei.nrouter.api.component.service.ServiceRouteHandler"
     )
 
-    val INSTANCE_ROUTE_HANDLER = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.component.instance.InstanceRouteHandler"
+    val CREATABLE_ROUTE_HANDLER = ClassName.bestGuess(
+        "club.fdawei.nrouter.api.component.creatable.CreatableRouteHandler"
     )
 
     val INJECTOR = ClassName.bestGuess(
@@ -68,5 +68,5 @@ object TypeBox {
         "club.fdawei.nrouter.api.inject.ProviderMetaData"
     )
 
-    val ACTION_DATA = ClassName.bestGuess("club.fdawei.nrouter.api.action.ActionData")
+    val ACTION_BUNDLE = ClassName.bestGuess("club.fdawei.nrouter.api.action.ActionBundle")
 }
