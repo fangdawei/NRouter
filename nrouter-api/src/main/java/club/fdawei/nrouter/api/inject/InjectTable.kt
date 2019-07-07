@@ -12,11 +12,11 @@ class InjectTable {
     private val providerMap = mutableMapOf<KClass<out Any>, Keeper<AutowiredProvider>>()
 
     fun registerInjector(meta: InjectorMeta) {
-        injectorMap[meta.target] = Keeper.of(meta.creator)
+        injectorMap[meta.target] = Keeper.of(meta.injectorBundle.creator)
     }
 
     fun registerProvider(meta: ProviderMeta) {
-        val keeper = Keeper.of(meta.creator)
+        val keeper = Keeper.of(meta.typeBundle.creator)
         meta.sources.forEach {
             providerMap[it] = keeper
         }

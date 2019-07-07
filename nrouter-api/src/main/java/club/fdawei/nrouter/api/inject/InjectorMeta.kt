@@ -1,5 +1,6 @@
 package club.fdawei.nrouter.api.inject
 
+import club.fdawei.nrouter.api.base.TypeBundle
 import kotlin.reflect.KClass
 
 /**
@@ -7,5 +8,5 @@ import kotlin.reflect.KClass
  */
 class InjectorMeta(
     val target: KClass<out Any>,
-    val creator: () -> Injector
+    val injectorBundle: TypeBundle<Injector>
 )

@@ -15,7 +15,7 @@ class RouteTable : RouteTree("", "") {
         }
         val pathSplitList = routeNodeMeta.path.splitRoutePath()
         addHandler(pathSplitList, routeNodeMeta)
-        RouteHandlerRepository.register(routeNodeMeta.handlerType, routeNodeMeta.handlerCreator)
+        RouteHandlerRepository.register(routeNodeMeta.handlerBundle)
     }
 
     fun registerInterceptor(interceptor: InterceptorMeta) {
@@ -30,7 +30,7 @@ class RouteTable : RouteTree("", "") {
         val routeHandler = if (routeNodeMeta == null) {
             null
         } else {
-            RouteHandlerRepository.get(routeNodeMeta.handlerType)
+            RouteHandlerRepository.get(routeNodeMeta.handlerBundle.type)
         }
         return AddressingResult(routeNodeMeta, routeHandler, interceptorList)
     }

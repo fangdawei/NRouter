@@ -1,6 +1,7 @@
 package club.fdawei.nrouter.api.route
 
 import club.fdawei.nrouter.api.base.Keeper
+import club.fdawei.nrouter.api.base.TypeBundle
 import club.fdawei.nrouter.api.component.activity.ActivityRouteHandler
 import club.fdawei.nrouter.api.component.creatable.CreatableRouteHandler
 import club.fdawei.nrouter.api.component.fragment.FragmentRouteHandler
@@ -28,6 +29,10 @@ object RouteHandlerRepository {
                 routeHandlerMap[type] = Keeper.of(creator)
             }
         }
+    }
+
+    fun register(typeBundle: TypeBundle<RouteHandler>) {
+        register(typeBundle.type, typeBundle.creator)
     }
 
     fun get(type: KClass<out RouteHandler>): RouteHandler? {

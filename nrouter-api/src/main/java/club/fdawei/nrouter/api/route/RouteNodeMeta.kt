@@ -1,5 +1,6 @@
 package club.fdawei.nrouter.api.route
 
+import club.fdawei.nrouter.api.base.TypeBundle
 import kotlin.reflect.KClass
 
 /**
@@ -10,8 +11,7 @@ class RouteNodeMeta(
     val target: KClass<out Any>,
     val flags: Long,
     val desc: String,
-    val handlerType: KClass<out RouteHandler>,
-    val handlerCreator: () -> RouteHandler
+    val handlerBundle: TypeBundle<RouteHandler>
 ) {
     val nodeInfo: RouteNodeInfo by lazy { RouteNodeInfo(target, flags) }
 
@@ -20,7 +20,7 @@ class RouteNodeMeta(
                 "path='$path', " +
                 "target=${target.qualifiedName}, " +
                 "flags=$flags, " +
-                "handler=${handlerType.qualifiedName}" +
+                "handler=${handlerBundle.type.qualifiedName}" +
                 "}"
     }
 }

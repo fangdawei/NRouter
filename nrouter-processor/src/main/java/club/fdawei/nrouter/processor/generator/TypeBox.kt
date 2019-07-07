@@ -77,4 +77,6 @@ object TypeBox {
     val SCHEME_META = ClassName.bestGuess(
         "club.fdawei.nrouter.api.scheme.SchemeMeta"
     )
+
+    val TYPE_BUNDLE = ClassName.bestGuess("club.fdawei.nrouter.api.base.TypeBundle")
 }

@@ -1,6 +1,8 @@
 package club.fdawei.nrouter.api.scheme
 
 import android.content.Intent
+import club.fdawei.nrouter.api.NRouter
+import club.fdawei.nrouter.api.common.COMMON_TAG
 import club.fdawei.nrouter.api.provider.MultiProvider
 
 /**
@@ -12,6 +14,7 @@ class SchemeManager {
 
     fun loadSchemeTable(provider: MultiProvider?) {
         provider?.provide(schemeTable)
+        NRouter.logger.d(COMMON_TAG, "load scheme table finish")
     }
 
     fun handleScheme(intent: Intent) {
