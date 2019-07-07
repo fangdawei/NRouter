@@ -1,4 +1,4 @@
-package club.fdawei.nrouter.api.component.activity
+package club.fdawei.nrouter.api.component.activity.arg
 
 /**
  * Create by david on 2019/06/02.

@@ -1,9 +1,6 @@
 package club.fdawei.nrouter.processor
 
-import club.fdawei.nrouter.annotation.Autowired
-import club.fdawei.nrouter.annotation.Interceptor
-import club.fdawei.nrouter.annotation.Provider
-import club.fdawei.nrouter.annotation.Route
+import club.fdawei.nrouter.annotation.*
 import club.fdawei.nrouter.processor.common.Context
 import club.fdawei.nrouter.processor.generator.InjectorGenerator
 import club.fdawei.nrouter.processor.generator.ProviderGenerator
@@ -47,7 +44,8 @@ class NRouterProcessor : AbstractProcessor() {
             Route::class.java.canonicalName,
             Interceptor::class.java.canonicalName,
             Provider::class.java.canonicalName,
-            Autowired::class.java.canonicalName
+            Autowired::class.java.canonicalName,
+            Scheme::class.java.canonicalName
         )
     }
 
@@ -66,6 +64,7 @@ class NRouterProcessor : AbstractProcessor() {
         collectInterceptorWith(roundEnv)
         collectProviderWith(roundEnv)
         collectAutowiredWith(roundEnv)
+        collectSchemeWith(roundEnv)
         if (!context.moduleName.isNullOrEmpty()) {
             injectorGenerator.genKtFile(filer)
             providerGenerator.genKtFile(filer)
@@ -109,6 +108,15 @@ class NRouterProcessor : AbstractProcessor() {
                 val field = it as VariableElement
                 injectorGenerator.addAutowiredWith(type, field)
                 providerGenerator.addAutowiredWith(type, field)
+            }
+        }
+    }
+
+    private fun collectSchemeWith(roundEnv: RoundEnvironment) {
+        val elements = roundEnv.getElementsAnnotatedWith(Scheme::class.java)
+        elements.forEach {
+            if (it.kind == ElementKind.CLASS) {
+                providerGenerator.addSchemeWith(it as TypeElement)
             }
         }
     }

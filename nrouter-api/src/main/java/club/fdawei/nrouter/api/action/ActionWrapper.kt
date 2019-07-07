@@ -12,15 +12,15 @@ abstract class ActionWrapper<H> : Action<H>, ActionBundle {
     abstract val host: H
     override var flags = 0
     override val extras: Bundle = Bundle()
-    override val envs = TypeDataContainer()
+    override val args = TypeDataContainer()
 
-    override fun env(value: Any): H {
-        this.envs.put(value)
+    override fun arg(value: Any): H {
+        this.args.put(value)
         return host
     }
 
-    override fun env(container: TypeDataContainer): H {
-        this.envs.putAll(container)
+    override fun arg(container: TypeDataContainer): H {
+        this.args.putAll(container)
         return host
     }
 
@@ -31,13 +31,22 @@ abstract class ActionWrapper<H> : Action<H>, ActionBundle {
         return host
     }
 
-    override fun withData(bundle: Bundle): H {
-        this.extras.putAll(bundle)
+    override fun withData(bundle: Bundle?): H {
+        if (bundle != null) {
+            this.extras.putAll(bundle)
+        }
         return host
     }
 
     override fun withString(k: String, v: String): H {
         this.extras.putString(k, v)
+        return host
+    }
+
+    override fun withStrings(map: Map<String, String>): H {
+        map.forEach { (k, v) ->
+            this.extras.putString(k, v)
+        }
         return host
     }
 

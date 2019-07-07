@@ -7,7 +7,8 @@ package club.fdawei.nrouter.annotation
 @Retention(AnnotationRetention.BINARY)
 annotation class Interceptor(
     val path: String = "",
-    val priority: Int = DEFAULT_PRIORITY
+    val priority: Int = DEFAULT_PRIORITY,
+    val desc: String = ""
 ) {
     companion object {
         const val DEFAULT_PRIORITY = 9999

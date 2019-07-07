@@ -7,5 +7,5 @@ import kotlin.reflect.KClass
  */
 class RouteNodeInfo(
     val target: KClass<out Any>,
-    val flags: Int
+    val flags: Long
 )

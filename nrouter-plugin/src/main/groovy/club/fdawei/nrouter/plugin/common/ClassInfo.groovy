@@ -13,7 +13,6 @@ final class ClassInfo {
 
     final static class MultiProvider {
         static final String NAME = 'club.fdawei.nrouter.api.provider.MultiProvider'
-        static final String METHOD_PROVIDE_NAME = 'provide'
     }
 
     final static class ModuleProvider {
@@ -24,5 +23,9 @@ final class ClassInfo {
 
     final static class AppProvider {
         static final String NAME = 'club.fdawei.nrouter.providers.App_Provider'
+    }
+
+    final static class SchemeDispatchActivity {
+        static final String NAME = 'club.fdawei.nrouter.api.scheme.SchemeDispatchActivity'
     }
 }

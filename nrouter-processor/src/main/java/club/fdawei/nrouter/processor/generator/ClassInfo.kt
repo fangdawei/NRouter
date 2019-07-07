@@ -28,10 +28,15 @@ object ClassInfo {
         const val FUN_REGISTER_INJECTOR = "registerInjector"
     }
 
+    object SchemeTable {
+        const val FUN_REGISTER_SCHEME = "registerScheme"
+    }
+
     object MultiProvider {
         const val FUN_PROVIDE_NAME = "provide"
         const val FUN_ARG_ROUTE_TABLE = "routeTable"
         const val FUN_ARG_INJECT_TABLE = "injectTable"
+        const val FUN_ARG_SCHEME_TABLE = "schemeTable"
     }
 
     object AutowiredProvider {
@@ -46,7 +51,7 @@ object ClassInfo {
         const val FUN_ARG_DATA = "data"
     }
 
-    object ProviderMetaData {
+    object ProviderMeta {
         const val FUN_ADD_SOURCE = "addSource"
     }
 }

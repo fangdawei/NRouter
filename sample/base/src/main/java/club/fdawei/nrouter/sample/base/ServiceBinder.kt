@@ -1,4 +1,4 @@
-package club.fdawei.nrouter.sample.base.service
+package club.fdawei.nrouter.sample.base
 
 import android.os.Binder
 import android.util.Log

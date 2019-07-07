@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import club.fdawei.nrouter.annotation.Route
 import club.fdawei.nrouter.api.NRouter
-import club.fdawei.nrouter.api.component.service.ServiceOption
+import club.fdawei.nrouter.api.component.service.arg.ServiceOption
 import club.fdawei.nrouter.sample.base.IPageLogger
 import kotlinx.android.synthetic.main.activity_a.*
 
@@ -28,11 +28,11 @@ class AActivity : AppCompatActivity() {
         }
 
         tvStartMainService.setOnClickListener {
-            NRouter.route("/main/service/main").env(ServiceOption.START).go()
+            NRouter.route("/main/service/main").arg(ServiceOption.START).go()
         }
 
         tvStopMainService.setOnClickListener {
-            NRouter.route("/main/service/main").env(ServiceOption.STOP).go()
+            NRouter.route("/main/service/main").arg(ServiceOption.STOP).go()
         }
 
         NRouter.instance().get(IPageLogger::class)?.logPage("AActivity")

@@ -2,6 +2,8 @@
 
 package club.fdawei.nrouter.api.util
 
+import android.net.Uri
+
 /**
  * Create by david on 2019/05/26.
  */
@@ -52,4 +54,13 @@ fun String.trimRoutePath(): String {
 fun String.splitRoutePath(): List<String> {
     val realPath = this.trimRoutePath()
     return if (realPath.isEmpty()) emptyList() else realPath.split(ROUTE_PATH_SEPARATOR)
+}
+
+fun Uri?.routeUri(): String? {
+    return when {
+        this == null -> null
+        this.path.isNullOrBlank() -> null
+        this.query.isNullOrBlank() -> this.path
+        else -> this.path!! + ROUTE_PATH_ARG_SEPARATOR + this.query
+    }
 }

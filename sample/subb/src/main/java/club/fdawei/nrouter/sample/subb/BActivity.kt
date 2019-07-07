@@ -7,9 +7,9 @@ import android.os.IBinder
 import android.support.v7.app.AppCompatActivity
 import club.fdawei.nrouter.annotation.Route
 import club.fdawei.nrouter.api.NRouter
-import club.fdawei.nrouter.api.component.service.ServiceOption
+import club.fdawei.nrouter.api.component.service.arg.ServiceOption
 import club.fdawei.nrouter.sample.base.IPageLogger
-import club.fdawei.nrouter.sample.base.service.ServiceBinder
+import club.fdawei.nrouter.sample.base.ServiceBinder
 import kotlinx.android.synthetic.main.activity_b.*
 
 @Route(path = "/subb/page/home", desc = "B页面")
@@ -17,14 +17,14 @@ class BActivity : AppCompatActivity() {
 
     private val conn = object : ServiceConnection {
         override fun onServiceDisconnected(name: ComponentName?) {
-            srvBinder = null
+            serviceBinder = null
         }
 
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-            srvBinder = service as ServiceBinder
+            serviceBinder = service as ServiceBinder
         }
     }
-    private var srvBinder: ServiceBinder? = null
+    private var serviceBinder: ServiceBinder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,7 @@ class BActivity : AppCompatActivity() {
         }
 
         tvMainServiceBtn.setOnClickListener {
-            srvBinder?.printName()
+            serviceBinder?.printName()
         }
 
         NRouter.instance().get(IPageLogger::class)?.logPage("BActivity")
@@ -52,16 +52,16 @@ class BActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         NRouter.route("/main/service/main")
-            .env(ServiceOption.BIND)
-            .env(conn)
+            .arg(ServiceOption.BIND)
+            .arg(conn)
             .go()
     }
 
     override fun onStop() {
         super.onStop()
         NRouter.route("/main/service/main")
-            .env(ServiceOption.UNBIND)
-            .env(conn)
+            .arg(ServiceOption.UNBIND)
+            .arg(conn)
             .go()
     }
 }

@@ -1,6 +1,6 @@
 package club.fdawei.nrouter.api.action
 
-import club.fdawei.nrouter.api.route.RouteHandler
+import club.fdawei.nrouter.api.route.RouteResult
 import kotlin.reflect.KClass
 
 /**
@@ -8,19 +8,18 @@ import kotlin.reflect.KClass
  */
 class RouteActionImpl(
     override val uri: String,
-    private val getHandler: ((RouteActionImpl) -> RouteHandler?)
-) : RouteAction,
-    RouteActionBundle, ActionWrapper<RouteAction>() {
+    private val router: ((RouteActionBundle) -> RouteResult?)
+) : RouteAction, RouteActionBundle, ActionWrapper<RouteAction>() {
 
     override val host: RouteAction = this
-    private val routeHandler: RouteHandler? by lazy { getHandler.invoke(this) }
+    private val result: RouteResult? by lazy { router.invoke(this) }
 
     override fun go() {
-        routeHandler?.go(this)
+        result?.handler?.go(this, result?.node)
     }
 
     override fun get(): Any? {
-        return routeHandler?.get(this)
+        return result?.handler?.get(this, result?.node)
     }
 
     @Suppress("UNCHECKED_CAST")

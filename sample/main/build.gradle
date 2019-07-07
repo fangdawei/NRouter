@@ -6,6 +6,15 @@ apply plugin: 'kotlin-kapt'
 def localRepoDir = new File(rootProject.localRepoPath)
 if (localRepoDir.exists()) {
     apply plugin: 'nrouter-plugin'
+
+    nrouter {
+        name 'sample'
+        scheme {
+            support true
+            scheme 'nrouter'
+            host 'sample'
+        }
+    }
 }
 
 android {

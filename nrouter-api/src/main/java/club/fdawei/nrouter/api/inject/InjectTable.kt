@@ -1,5 +1,6 @@
 package club.fdawei.nrouter.api.inject
 
+import club.fdawei.nrouter.api.base.Keeper
 import kotlin.reflect.KClass
 
 /**
@@ -7,32 +8,32 @@ import kotlin.reflect.KClass
  */
 class InjectTable {
 
-    private val injectorMap = mutableMapOf<KClass<out Any>, InjectorKeeper>()
-    private val providerMap = mutableMapOf<KClass<out Any>, ProviderKeeper>()
+    private val injectorMap = mutableMapOf<KClass<out Any>, Keeper<Injector>>()
+    private val providerMap = mutableMapOf<KClass<out Any>, Keeper<AutowiredProvider>>()
 
-    fun registerInjector(metaData: InjectorMetaData) {
-        injectorMap[metaData.target] = InjectorKeeper(metaData.creator)
+    fun registerInjector(meta: InjectorMeta) {
+        injectorMap[meta.target] = Keeper.of(meta.injectorBundle.creator)
     }
 
-    fun registerProvider(metaData: ProviderMetaData) {
-        val keeper = ProviderKeeper(metaData.creator)
-        metaData.sources.forEach {
+    fun registerProvider(meta: ProviderMeta) {
+        val keeper = Keeper.of(meta.typeBundle.creator)
+        meta.sources.forEach {
             providerMap[it] = keeper
         }
     }
 
     fun getInjector(kClass: KClass<out Any>): Injector? {
-        return injectorMap[kClass]?.injector
+        return injectorMap[kClass]?.instance
     }
 
     fun getProvider(kClass: KClass<out Any>): AutowiredProvider? {
-        return providerMap[kClass]?.provider
+        return providerMap[kClass]?.instance
     }
 
     fun print(): String {
         val sirBuilder = StringBuilder()
-        providerMap.forEach {
-            sirBuilder.append("\n${it.key.qualifiedName} -> ${it.value.provider::class.qualifiedName}")
+        providerMap.forEach { (clz, keeper) ->
+            sirBuilder.append("\n${clz.qualifiedName} -> ${keeper.instance::class.qualifiedName}")
         }
         return sirBuilder.toString()
     }

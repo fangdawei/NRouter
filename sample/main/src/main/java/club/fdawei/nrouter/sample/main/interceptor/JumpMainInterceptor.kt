@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import club.fdawei.nrouter.annotation.Interceptor
-import club.fdawei.nrouter.api.route.InterceptInvocation
+import club.fdawei.nrouter.api.route.InterceptContext
 import club.fdawei.nrouter.api.route.RouteInterceptor
 
 /**
@@ -12,12 +12,12 @@ import club.fdawei.nrouter.api.route.RouteInterceptor
  */
 @Interceptor(path = "/main/page/home")
 class JumpMainInterceptor : RouteInterceptor {
-    override fun intercept(invocation: InterceptInvocation) {
-        val context = invocation.data.envs.get(Context::class, assignable = true)
-        if (context != null) {
-            Toast.makeText(context, "jump to main page", Toast.LENGTH_SHORT).show()
+    override fun intercept(context: InterceptContext): Boolean {
+        val ctx = context.data.args.get(Context::class, assignable = true)
+        if (ctx != null) {
+            Toast.makeText(ctx, "jump to main page", Toast.LENGTH_SHORT).show()
         }
-        invocation.data.flags = invocation.data.flags.or(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        invocation.next()
+        context.data.flags = context.data.flags.or(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        return false
     }
 }
