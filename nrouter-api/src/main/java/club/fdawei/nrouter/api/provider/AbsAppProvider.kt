@@ -2,11 +2,12 @@ package club.fdawei.nrouter.api.provider
 
 import club.fdawei.nrouter.api.inject.InjectTable
 import club.fdawei.nrouter.api.route.RouteTable
+import club.fdawei.nrouter.api.scheme.SchemeTable
 
 /**
  * Created by david on 2019/06/06.
  */
-abstract class AbsAppProvider : MultiProvider {
+open class AbsAppProvider : MultiProvider {
 
     private val providers = mutableListOf<MultiProvider>()
 
@@ -14,21 +15,29 @@ abstract class AbsAppProvider : MultiProvider {
         this.initProviders()
     }
 
-    abstract fun initProviders()
+    open fun initProviders() {
+
+    }
 
     fun addProvider(provider: MultiProvider) {
         providers.add(provider)
     }
 
     override fun provide(routeTable: RouteTable) {
-        providers.forEach {
-            it.provide(routeTable)
+        for (provider in providers) {
+            provider.provide(routeTable)
         }
     }
 
     override fun provide(injectTable: InjectTable) {
-        providers.forEach {
-            it.provide(injectTable)
+        for (provider in providers) {
+            provider.provide(injectTable)
+        }
+    }
+
+    override fun provide(schemeTable: SchemeTable) {
+        for (provider in providers) {
+            provider.provide(schemeTable)
         }
     }
 }

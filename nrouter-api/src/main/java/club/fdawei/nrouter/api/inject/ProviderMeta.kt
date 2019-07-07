@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 /**
  * Create by david on 2019/06/07.
  */
-class ProviderMetaData(
+class ProviderMeta(
     val creator: () -> AutowiredProvider
 ) {
     val sources = mutableListOf<KClass<out Any>>()

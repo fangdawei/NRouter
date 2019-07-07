@@ -47,3 +47,12 @@ dependencies {
     implementation project(':subb')
     implementation project(':subc')
 }
+
+nrouter {
+    name 'sample'
+    scheme {
+        support true
+        scheme 'nrouter'
+        host 'sample'
+    }
+}

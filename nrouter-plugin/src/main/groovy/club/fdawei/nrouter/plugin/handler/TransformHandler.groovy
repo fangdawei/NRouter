@@ -1,4 +1,4 @@
-package club.fdawei.nrouter.plugin
+package club.fdawei.nrouter.plugin.handler
 
 import club.fdawei.nrouter.plugin.base.ProviderInfo
 import club.fdawei.nrouter.plugin.common.ClassInfo

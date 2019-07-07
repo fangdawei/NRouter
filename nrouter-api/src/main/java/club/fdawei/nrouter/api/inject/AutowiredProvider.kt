@@ -15,7 +15,7 @@ open class AutowiredProvider {
         data: ActionBundle
     ): T? {
         return NRouter.route(name)
-            .env(data.envs)
+            .arg(data.args)
             .withData(data.extras)
             .withFlags(data.flags)
             .get(type)

@@ -7,10 +7,10 @@ import android.util.Log
 import club.fdawei.nrouter.annotation.Autowired
 import club.fdawei.nrouter.annotation.Route
 import club.fdawei.nrouter.api.NRouter
-import club.fdawei.nrouter.api.component.activity.ActivityOption
-import club.fdawei.nrouter.api.component.activity.RequestCode
+import club.fdawei.nrouter.api.component.activity.arg.ActivityOption
+import club.fdawei.nrouter.api.component.activity.arg.RequestCode
 import club.fdawei.nrouter.sample.base.IPageLogger
-import club.fdawei.nrouter.sample.base.service.IService
+import club.fdawei.nrouter.sample.base.creatable.IService
 import kotlinx.android.synthetic.main.activity_main.*
 
 @Route(path = "/main/page/home", desc = "Home页面")
@@ -24,18 +24,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         tvAPageBtn.setOnClickListener {
-            NRouter.route("/suba/page/home").env(this).go()
+            NRouter.route("/suba/page/home").arg(this).go()
         }
 
         tvBPageBtn.setOnClickListener {
-            NRouter.route("/subb/page/home").env(this).go()
+            NRouter.route("/subb/page/home").arg(this).go()
         }
 
         tvCPageBtn.setOnClickListener {
             NRouter.route("/subc/page/home")
-                .env(this)
-                .env(ActivityOption.START_FOR_RESULT)
-                .env(RequestCode(1000))
+                .arg(this)
+                .arg(ActivityOption.START_FOR_RESULT)
+                .arg(RequestCode.of(1000))
                 .go()
         }
 

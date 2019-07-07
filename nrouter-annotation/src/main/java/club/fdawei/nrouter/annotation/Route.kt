@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 @Retention(AnnotationRetention.BINARY)
 annotation class Route(
     val path: String,
-    val flags: Int = 0,
+    val flags: Long = 0,
     val desc: String = "",
     val handler: KClass<out Any> = Any::class
 )

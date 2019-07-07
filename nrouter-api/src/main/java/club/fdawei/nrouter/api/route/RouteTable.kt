@@ -8,25 +8,31 @@ import club.fdawei.nrouter.api.util.splitRoutePath
  */
 class RouteTable : RouteTree("", "") {
 
-    fun registerRouteNode(routeNodeMetaData: RouteNodeMetaData) {
-        if (routeNodeMetaData.path.isEmpty()) {
-            ExceptionUtils.exception("Path illegal, $routeNodeMetaData")
+    fun registerRouteNode(routeNodeMeta: RouteNodeMeta) {
+        if (routeNodeMeta.path.isEmpty()) {
+            ExceptionUtils.exception("Path illegal, $routeNodeMeta")
             return
         }
-        val pathSplitList = routeNodeMetaData.path.splitRoutePath()
-        addHandler(pathSplitList, routeNodeMetaData)
+        val pathSplitList = routeNodeMeta.path.splitRoutePath()
+        addHandler(pathSplitList, routeNodeMeta)
+        RouteHandlerRepository.register(routeNodeMeta.handlerType, routeNodeMeta.handlerCreator)
     }
 
-    fun registerInterceptor(interceptor: InterceptorMetaData) {
+    fun registerInterceptor(interceptor: InterceptorMeta) {
         val pathSplitList = interceptor.interceptPath.splitRoutePath()
         addInterceptor(pathSplitList, interceptor)
     }
 
-    fun addressing(path: String): RouteResult {
+    fun addressing(path: String): AddressingResult {
         val pathSplitList = path.splitRoutePath()
-        val interceptorList = mutableListOf<InterceptorMetaData>()
-        val routeMetaData = addressing(pathSplitList, interceptorList)
-        return RouteResult(routeMetaData, interceptorList)
+        val interceptorList = mutableListOf<InterceptorMeta>()
+        val routeNodeMeta = addressing(pathSplitList, interceptorList)
+        val routeHandler = if (routeNodeMeta == null) {
+            null
+        } else {
+            RouteHandlerRepository.get(routeNodeMeta.handlerType)
+        }
+        return AddressingResult(routeNodeMeta, routeHandler, interceptorList)
     }
 
     fun clear() {

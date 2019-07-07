@@ -5,14 +5,12 @@ import club.fdawei.nrouter.api.action.RouteActionBundle
 /**
  * Create by david on 2019/05/30.
  */
-abstract class RouteHandler(
-    val info: RouteNodeInfo?
-) {
-    open fun go(data: RouteActionBundle) {
+interface RouteHandler {
+    fun go(data: RouteActionBundle, info: RouteNodeInfo?) {
 
     }
 
-    open fun get(data: RouteActionBundle): Any? {
+    fun get(data: RouteActionBundle, info: RouteNodeInfo?): Any? {
         return null
     }
 }

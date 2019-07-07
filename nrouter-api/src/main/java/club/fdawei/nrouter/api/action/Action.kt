@@ -9,16 +9,18 @@ import club.fdawei.nrouter.api.base.TypeDataContainer
  */
 interface Action<H> {
 
-    fun env(value: Any): H
+    fun arg(value: Any): H
 
-    fun env(container: TypeDataContainer): H
+    fun arg(container: TypeDataContainer): H
 
 
     fun withFlags(vararg flag: Int): H
 
-    fun withData(bundle: Bundle): H
+    fun withData(bundle: Bundle?): H
 
     fun withString(k: String, v: String): H
+
+    fun withStrings(map: Map<String, String>): H
 
     fun withStringArrayList(k: String, v: ArrayList<String>): H
 

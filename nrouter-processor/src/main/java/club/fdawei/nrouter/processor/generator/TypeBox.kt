@@ -22,6 +22,10 @@ object TypeBox {
         "club.fdawei.nrouter.api.inject.InjectTable"
     )
 
+    val SCHEME_TABLE = ClassName.bestGuess(
+        "club.fdawei.nrouter.api.scheme.SchemeTable"
+    )
+
     val MULTI_PROVIDER = ClassName.bestGuess(
         "club.fdawei.nrouter.api.provider.MultiProvider"
     )
@@ -30,12 +34,12 @@ object TypeBox {
         "club.fdawei.nrouter.api.provider.AbsAppProvider"
     )
 
-    val ROUTE_NODE_META_DATA = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.route.RouteNodeMetaData"
+    val ROUTE_NODE_META = ClassName.bestGuess(
+        "club.fdawei.nrouter.api.route.RouteNodeMeta"
     )
 
-    val INTERCEPTOR_META_DATA = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.route.InterceptorMetaData"
+    val INTERCEPTOR_META = ClassName.bestGuess(
+        "club.fdawei.nrouter.api.route.InterceptorMeta"
     )
 
     val ACTIVITY_ROUTE_HANDLER = ClassName.bestGuess(
@@ -60,13 +64,17 @@ object TypeBox {
 
     val AUTOWIRED_PROVIDER = ClassName.bestGuess(AUTOWIRED_PROVIDER_NAME)
 
-    val INJECTOR_META_DATA = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.inject.InjectorMetaData"
+    val INJECTOR_META = ClassName.bestGuess(
+        "club.fdawei.nrouter.api.inject.InjectorMeta"
     )
 
-    val PROVIDER_META_DATA = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.inject.ProviderMetaData"
+    val PROVIDER_META = ClassName.bestGuess(
+        "club.fdawei.nrouter.api.inject.ProviderMeta"
     )
 
     val ACTION_BUNDLE = ClassName.bestGuess("club.fdawei.nrouter.api.action.ActionBundle")
+
+    val SCHEME_META = ClassName.bestGuess(
+        "club.fdawei.nrouter.api.scheme.SchemeMeta"
+    )
 }

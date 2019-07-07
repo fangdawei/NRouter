@@ -9,5 +9,5 @@ import club.fdawei.nrouter.api.base.TypeDataContainer
 interface ActionBundle {
     var flags: Int
     val extras: Bundle
-    val envs: TypeDataContainer
+    val args: TypeDataContainer
 }
