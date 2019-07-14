@@ -5,12 +5,12 @@ import java.util.*
 /**
  * Create by david on 2019/07/06.
  */
-class SchemeTable {
+class SchemeTable : SchemeRegistry {
 
     private val schemeMetaSet = TreeSet<SchemeMeta>()
     val schemeHandlers by lazy { schemeMetaSet.map { it.handler } }
 
-    fun registerScheme(schemeMeta: SchemeMeta) {
+    override fun registerScheme(schemeMeta: SchemeMeta) {
         schemeMetaSet.add(schemeMeta)
     }
 }

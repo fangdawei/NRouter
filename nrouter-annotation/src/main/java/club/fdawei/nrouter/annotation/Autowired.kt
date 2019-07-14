@@ -6,5 +6,6 @@ package club.fdawei.nrouter.annotation
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.BINARY)
 annotation class Autowired(
-    val name: String = ""
+    val name: String = "",
+    val path: String = ""
 )

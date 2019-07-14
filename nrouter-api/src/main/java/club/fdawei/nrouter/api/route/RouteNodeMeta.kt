@@ -8,10 +8,10 @@ import kotlin.reflect.KClass
  */
 class RouteNodeMeta(
     val path: String,
-    val target: KClass<out Any>,
+    val target: KClass<*>,
     val flags: Long,
     val desc: String,
-    val handlerBundle: TypeBundle<RouteHandler>
+    val handlerBundle: TypeBundle<out RouteHandler>
 ) {
     val nodeInfo: RouteNodeInfo by lazy { RouteNodeInfo(target, flags) }
 

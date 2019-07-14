@@ -1,8 +1,8 @@
 package club.fdawei.nrouter.api.provider
 
-import club.fdawei.nrouter.api.inject.InjectTable
-import club.fdawei.nrouter.api.route.RouteTable
-import club.fdawei.nrouter.api.scheme.SchemeTable
+import club.fdawei.nrouter.api.inject.InjectRegistry
+import club.fdawei.nrouter.api.route.RouteRegistry
+import club.fdawei.nrouter.api.scheme.SchemeRegistry
 
 /**
  * Created by david on 2019/06/06.
@@ -23,21 +23,21 @@ open class AbsAppProvider : MultiProvider {
         providers.add(provider)
     }
 
-    override fun provide(routeTable: RouteTable) {
+    override fun provide(registry: RouteRegistry) {
         for (provider in providers) {
-            provider.provide(routeTable)
+            provider.provide(registry)
         }
     }
 
-    override fun provide(injectTable: InjectTable) {
+    override fun provide(registry: InjectRegistry) {
         for (provider in providers) {
-            provider.provide(injectTable)
+            provider.provide(registry)
         }
     }
 
-    override fun provide(schemeTable: SchemeTable) {
+    override fun provide(registry: SchemeRegistry) {
         for (provider in providers) {
-            provider.provide(schemeTable)
+            provider.provide(registry)
         }
     }
 }

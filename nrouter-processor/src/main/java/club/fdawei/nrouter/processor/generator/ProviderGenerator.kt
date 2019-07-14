@@ -87,8 +87,8 @@ class ProviderGenerator(
         val funBuilder = FunSpec.builder(ClassInfo.MultiProvider.FUN_PROVIDE_NAME)
             .addModifiers(KModifier.FINAL, KModifier.OVERRIDE)
             .addParameter(
-                ClassInfo.MultiProvider.FUN_ARG_ROUTE_TABLE,
-                TypeBox.ROUTE_TABLE
+                ClassInfo.MultiProvider.FUN_ARG_REGISTRY,
+                TypeBox.ROUTE_REGISTRY
             )
 
         val activity = getTypeMirror(TypeBox.ACTIVITY_NAME)
@@ -136,7 +136,7 @@ class ProviderGenerator(
             }
             if (handler != null) {
                 funBuilder.addStatement(
-                    "${ClassInfo.MultiProvider.FUN_ARG_ROUTE_TABLE}.${ClassInfo.RouteTable.FUN_REGISTER_ROUTE_NODE}" +
+                    "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.RouteRegistry.FUN_REGISTER_ROUTE_NODE}" +
                             "(%T(%S, %T::class, %L, %S, %T(%T::class, { %T() })))",
                     TypeBox.ROUTE_NODE_META, path, it.asType(), flags, desc, TypeBox.TYPE_BUNDLE, handler, handler
                 )
@@ -151,7 +151,7 @@ class ProviderGenerator(
             val desc = interceptor.desc
             val interceptorType = it.asClassName()
             funBuilder.addStatement(
-                "${ClassInfo.MultiProvider.FUN_ARG_ROUTE_TABLE}.${ClassInfo.RouteTable.FUN_REGISTER_INTERCEPTOR}" +
+                "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.RouteRegistry.FUN_REGISTER_INTERCEPTOR}" +
                         "(%T(%S, %L, %S, %T(%T::class, { %T() })))",
                 TypeBox.INTERCEPTOR_META, path, priority, desc, TypeBox.TYPE_BUNDLE, interceptorType, interceptorType
             )
@@ -164,8 +164,8 @@ class ProviderGenerator(
         val funBuilder = FunSpec.builder(ClassInfo.MultiProvider.FUN_PROVIDE_NAME)
             .addModifiers(KModifier.FINAL, KModifier.OVERRIDE)
             .addParameter(
-                ClassInfo.MultiProvider.FUN_ARG_INJECT_TABLE,
-                TypeBox.INJECT_TABLE
+                ClassInfo.MultiProvider.FUN_ARG_REGISTRY,
+                TypeBox.INJECT_REGISTRY
             )
 
         val autowiredProvider = getTypeMirror(TypeBox.AUTOWIRED_PROVIDER_NAME)
@@ -183,8 +183,8 @@ class ProviderGenerator(
                 val providerType = it.asClassName()
                 val codeBuilder = CodeBlock.builder()
                 codeBuilder.addStatement(
-                    "${ClassInfo.MultiProvider.FUN_ARG_INJECT_TABLE}." +
-                            "${ClassInfo.InjectTable.FUN_REGISTER_PROVIDER}(%T(%T(%T::class, { %T() })).apply {",
+                    "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}." +
+                            "${ClassInfo.InjectRegistry.FUN_REGISTER_PROVIDER}(%T(%T(%T::class, { %T() })).apply {",
                     TypeBox.PROVIDER_META, TypeBox.TYPE_BUNDLE, providerType, providerType
                 )
                 codeBuilder.indent()
@@ -203,7 +203,7 @@ class ProviderGenerator(
             val injectorName = it.identityName(pkgName) + ClassInfo.INJECTOR_NAME_SUFFIX
             val injectorType = ClassName.bestGuess("$pkgName.$injectorName")
             funBuilder.addStatement(
-                "${ClassInfo.MultiProvider.FUN_ARG_INJECT_TABLE}.${ClassInfo.InjectTable.FUN_REGISTER_INJECTOR}" +
+                "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.InjectRegistry.FUN_REGISTER_INJECTOR}" +
                         "(%T(%T::class, %T(%T::class, { %T() })))",
                 TypeBox.INJECTOR_META, it.asClassName(), TypeBox.TYPE_BUNDLE, injectorType, injectorType
             )
@@ -216,8 +216,8 @@ class ProviderGenerator(
         val funBuilder = FunSpec.builder(ClassInfo.MultiProvider.FUN_PROVIDE_NAME)
             .addModifiers(KModifier.FINAL, KModifier.OVERRIDE)
             .addParameter(
-                ClassInfo.MultiProvider.FUN_ARG_SCHEME_TABLE,
-                TypeBox.SCHEME_TABLE
+                ClassInfo.MultiProvider.FUN_ARG_REGISTRY,
+                TypeBox.SCHEME_REGISTRY
             )
 
         funBuilder.addComment("register scheme")
@@ -225,7 +225,7 @@ class ProviderGenerator(
             val scheme = it.getAnnotation(Scheme::class.java)
             val handlerType = it.asClassName()
             funBuilder.addStatement(
-                "${ClassInfo.MultiProvider.FUN_ARG_SCHEME_TABLE}.${ClassInfo.SchemeTable.FUN_REGISTER_SCHEME}" +
+                "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.SchemeRegistry.FUN_REGISTER_SCHEME}" +
                         "(%T(%L, %T(%T::class, { %T() })))",
                 TypeBox.SCHEME_META, scheme.priority, TypeBox.TYPE_BUNDLE, handlerType, handlerType
             )

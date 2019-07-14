@@ -58,7 +58,7 @@ class InjectorGenerator(
         funBuilder.endControlFlow()
         variableList.forEach {
             val autowired = it.getAnnotation(Autowired::class.java)
-            val key = if (autowired.name.isNotEmpty()) {
+            val name = if (autowired.name.isNotEmpty()) {
                 autowired.name
             } else {
                 it.simpleName.toString()
@@ -69,9 +69,10 @@ class InjectorGenerator(
                         "${ClassInfo.AutowiredProvider.FUN_GET_AUTOWIRED}(" +
                         "${ClassInfo.Injector.FUN_ARG_SOURCE}, " +
                         "%S, " +
+                        "%S, " +
                         "%T::class, " +
                         "${ClassInfo.Injector.FUN_ARG_DATA})",
-                it.simpleName.toString(), key, it.kotlinType()
+                it.simpleName.toString(), name, autowired.path, it.kotlinType()
             )
         }
         return TypeSpec.classBuilder(name)

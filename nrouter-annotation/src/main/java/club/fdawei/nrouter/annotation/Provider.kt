@@ -8,5 +8,5 @@ import kotlin.reflect.KClass
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
 annotation class Provider(
-    vararg val sources: KClass<out Any>
+    vararg val sources: KClass<*>
 )

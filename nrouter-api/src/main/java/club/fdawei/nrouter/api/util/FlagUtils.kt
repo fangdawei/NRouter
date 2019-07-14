@@ -1,3 +1,5 @@
+@file:JvmName("FlagUtils")
+
 package club.fdawei.nrouter.api.util
 
 /**

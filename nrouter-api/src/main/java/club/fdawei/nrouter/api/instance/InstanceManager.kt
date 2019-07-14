@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
  */
 class InstanceManager : InstanceAction {
 
-    private val instanceMap: MutableMap<KClass<out Any>, Any> = ConcurrentHashMap()
+    private val instanceMap: MutableMap<KClass<*>, Any> = ConcurrentHashMap()
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any> get(clz: KClass<T>): T? {
@@ -18,7 +18,7 @@ class InstanceManager : InstanceAction {
         }
     }
 
-    override fun register(clz: KClass<out Any>, instance: Any) {
+    override fun register(clz: KClass<*>, instance: Any) {
         instanceMap[clz] = instance
     }
 }

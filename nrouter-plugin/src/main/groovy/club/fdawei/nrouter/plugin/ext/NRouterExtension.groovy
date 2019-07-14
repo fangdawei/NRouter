@@ -10,20 +10,28 @@ class NRouterExtension {
     private String name
     private SchemeConfig scheme = new SchemeConfig()
 
+    private INameObserver nameObserver
+
     String getName() {
         return name
-    }
-
-    void setName(String name) {
-        this.name = name
     }
 
     SchemeConfig getScheme() {
         return scheme
     }
 
+    void observeName(INameObserver nameObserver) {
+        this.nameObserver = nameObserver
+        if (nameObserver != null) {
+            nameObserver.onNameChanged(name)
+        }
+    }
+
     void name(CharSequence name) {
         this.name = name
+        if (nameObserver != null) {
+            nameObserver.onNameChanged(name)
+        }
     }
 
     void scheme(Action<SchemeConfig> action) {

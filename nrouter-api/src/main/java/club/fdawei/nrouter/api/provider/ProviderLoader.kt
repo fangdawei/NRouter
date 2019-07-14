@@ -2,7 +2,7 @@ package club.fdawei.nrouter.api.provider
 
 import club.fdawei.nrouter.api.NRouter
 import club.fdawei.nrouter.api.common.COMMON_TAG
-import club.fdawei.nrouter.api.util.ExceptionUtils
+import club.fdawei.nrouter.api.util.throwException
 
 /**
  * Create by david on 2019/06/06.
@@ -17,7 +17,7 @@ class ProviderLoader {
             NRouter.logger.e(COMMON_TAG, "App_Provider initialization error, class not found")
             null
         } catch (throwable: Throwable) {
-            ExceptionUtils.exception("App_Provider initialization error, ${throwable.message}")
+            throwException("App_Provider initialization error, ${throwable.message}")
             null
         }
     }

@@ -11,5 +11,5 @@ annotation class Route(
     val path: String,
     val flags: Long = 0,
     val desc: String = "",
-    val handler: KClass<out Any> = Any::class
+    val handler: KClass<*> = Any::class
 )

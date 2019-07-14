@@ -5,9 +5,9 @@ package club.fdawei.nrouter.processor.common
  */
 class Context {
     var moduleName: String? = null
-    var isAppModule: Boolean = false
+    var isApp: Boolean = false
 
     override fun toString(): String {
-        return "Context(moduleName=$moduleName, isAppModule=$isAppModule)"
+        return "Context(moduleName=$moduleName, isApp=$isApp)"
     }
 }

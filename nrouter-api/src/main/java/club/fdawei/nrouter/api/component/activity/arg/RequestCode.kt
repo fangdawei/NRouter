@@ -7,6 +7,7 @@ import club.fdawei.nrouter.api.base.DataValue
  */
 class RequestCode private constructor(value: Int) : DataValue<Int>(value) {
     companion object {
+        @JvmStatic
         fun of(value: Int): RequestCode {
             return RequestCode(value)
         }

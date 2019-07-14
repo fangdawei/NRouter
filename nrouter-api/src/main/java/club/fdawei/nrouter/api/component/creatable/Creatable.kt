@@ -9,5 +9,5 @@ interface Creatable {
     /**
      * 初始化方法，可能会被调用多次
      */
-    fun init(context: Context) {}
+    fun init(args: ArgBundle) {}
 }

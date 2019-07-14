@@ -7,13 +7,13 @@ import kotlin.reflect.KClass
  */
 object SingletonRepository {
 
-    private val instanceMap = mutableMapOf<KClass<out Any>, Any>()
+    private val instanceMap = mutableMapOf<KClass<out Creatable>, Creatable>()
 
-    fun get(kClass: KClass<out Any>): Any? {
+    fun get(kClass: KClass<*>): Any? {
         return instanceMap[kClass]
     }
 
-    fun getOrCreate(kClass: KClass<out Any>): Any? {
+    fun getOrCreate(kClass: KClass<out Creatable>): Any? {
         return get(kClass) ?: synchronized(instanceMap) {
             get(kClass) ?: CreatableFactory.create(kClass).apply {
                 if (this != null) {
@@ -23,7 +23,7 @@ object SingletonRepository {
         }
     }
 
-    private fun put(kClass: KClass<out Any>, instance: Any) {
+    private fun put(kClass: KClass<out Creatable>, instance: Creatable) {
         instanceMap[kClass] = instance
     }
 }

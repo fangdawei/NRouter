@@ -18,25 +18,23 @@ object ClassInfo {
         const val VAL_SOURCE = "sources"
     }
 
-    object RouteTable {
+    object RouteRegistry {
         const val FUN_REGISTER_ROUTE_NODE = "registerRouteNode"
         const val FUN_REGISTER_INTERCEPTOR = "registerInterceptor"
     }
 
-    object InjectTable {
+    object InjectRegistry {
         const val FUN_REGISTER_PROVIDER = "registerProvider"
         const val FUN_REGISTER_INJECTOR = "registerInjector"
     }
 
-    object SchemeTable {
+    object SchemeRegistry {
         const val FUN_REGISTER_SCHEME = "registerScheme"
     }
 
     object MultiProvider {
         const val FUN_PROVIDE_NAME = "provide"
-        const val FUN_ARG_ROUTE_TABLE = "routeTable"
-        const val FUN_ARG_INJECT_TABLE = "injectTable"
-        const val FUN_ARG_SCHEME_TABLE = "schemeTable"
+        const val FUN_ARG_REGISTRY = "registry"
     }
 
     object AutowiredProvider {
