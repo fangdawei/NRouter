@@ -16,7 +16,7 @@ open class AutowiredProvider {
         data: ActionBundle
     ): T? {
         return if (path.isNotBlank()) {
-            NRouter.route(name)
+            NRouter.route(path)
                 .arg(data.args)
                 .withData(data.extras)
                 .withFlags(data.flags)

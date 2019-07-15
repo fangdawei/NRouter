@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 @Route(path = "/main/page/home", desc = "Home页面")
 class MainActivity : AppCompatActivity() {
 
-    @Autowired(name = "/subc/service/cservice")
+    @Autowired(path = "/subc/service/cservice")
     var cService: IService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
