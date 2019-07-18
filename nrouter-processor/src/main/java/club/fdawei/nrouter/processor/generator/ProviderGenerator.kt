@@ -42,16 +42,23 @@ class ProviderGenerator(
     }
 
     fun addAutowiredWith(typeElement: TypeElement, element: VariableElement) {
-        var list: MutableList<VariableElement>? = autowiredElements[typeElement]
-        if (list == null) {
-            list = mutableListOf()
-            autowiredElements[typeElement] = list
-        }
+        val list: MutableList<VariableElement> = autowiredElements[typeElement]
+            ?: mutableListOf<VariableElement>().apply {
+                autowiredElements[typeElement] = this
+            }
         list.add(element)
     }
 
     fun addSchemeWith(typeElement: TypeElement) {
         schemeElements.add(typeElement)
+    }
+
+    private fun isEmpty(): Boolean {
+        return routeElements.isEmpty() &&
+                interceptorElements.isEmpty() &&
+                providerElements.isEmpty() &&
+                autowiredElements.isEmpty() &&
+                schemeElements.isEmpty()
     }
 
     fun clear() {
@@ -235,10 +242,7 @@ class ProviderGenerator(
     }
 
     fun genKtFile(filer: Filer) {
-        if (routeElements.isNotEmpty() ||
-            interceptorElements.isNotEmpty() ||
-            providerElements.isNotEmpty()
-        ) {
+        if (!isEmpty()) {
             val providerName = ClassInfo.PROVIDER_NAME_PREFIX +
                     context.moduleName + ClassInfo.PROVIDER_NAME_SUFFIX
             FileSpec.builder(ClassInfo.PROVIDER_PACKAGE, providerName)
