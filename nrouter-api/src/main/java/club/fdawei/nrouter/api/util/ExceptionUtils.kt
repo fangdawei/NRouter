@@ -8,7 +8,7 @@ import club.fdawei.nrouter.api.common.COMMON_TAG
 /**
  * Create by david on 2019/05/26.
  */
-fun throwException(msg: String) {
+fun safeThrowException(msg: String) {
     if (NRouter.debug) {
         throw RuntimeException(msg)
     } else {

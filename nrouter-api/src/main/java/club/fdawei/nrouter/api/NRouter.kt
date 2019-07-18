@@ -12,6 +12,7 @@ import club.fdawei.nrouter.api.provider.ProviderLoader
 import club.fdawei.nrouter.api.route.RouteManager
 import club.fdawei.nrouter.api.scheme.SchemeManager
 import club.fdawei.nrouter.api.util.parseRouteArgs
+import club.fdawei.nrouter.api.util.safeThrowException
 
 /**
  * Created by david on 2019/05/24.
@@ -19,7 +20,7 @@ import club.fdawei.nrouter.api.util.parseRouteArgs
 object NRouter {
 
     private val envs = TypeDataContainer()
-
+    private var hasInitialized = false
     private val providerLoader = ProviderLoader()
     private val routeManager = RouteManager()
     private val injectManager = InjectManager()
@@ -34,10 +35,15 @@ object NRouter {
 
     @JvmStatic
     fun init(context: Context) {
+        if (hasInitialized) {
+            safeThrowException("init has been called!")
+            return
+        }
         addEnv(context)
         routeManager.loadRouteTable(providerLoader.provider)
         injectManager.loadInjectInfo(providerLoader.provider)
         schemeManager.loadSchemeTable(providerLoader.provider)
+        hasInitialized = true
     }
 
     @JvmStatic
@@ -45,8 +51,15 @@ object NRouter {
         envs.put(env)
     }
 
+    fun checkIfInitialized() {
+        if (!hasInitialized) {
+            safeThrowException("init should be call first!")
+        }
+    }
+
     @JvmStatic
     fun route(uri: String): RouteAction {
+        checkIfInitialized()
         return RouteActionImpl(uri) {
             val args = it.uri.parseRouteArgs()
             args.forEach { (k, v) ->
@@ -59,6 +72,7 @@ object NRouter {
 
     @JvmStatic
     fun injector(): InjectAction {
+        checkIfInitialized()
         return InjectActionImpl({
             injectManager.getInjector(it)
         }, {
@@ -68,11 +82,13 @@ object NRouter {
 
     @JvmStatic
     fun instance(): InstanceAction {
+        checkIfInitialized()
         return instanceManager
     }
 
     @JvmStatic
     internal fun scheme(intent: Intent) {
+        checkIfInitialized()
         schemeManager.handleScheme(intent)
     }
 }

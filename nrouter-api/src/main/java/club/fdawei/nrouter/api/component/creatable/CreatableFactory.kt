@@ -1,6 +1,6 @@
 package club.fdawei.nrouter.api.component.creatable
 
-import club.fdawei.nrouter.api.util.throwException
+import club.fdawei.nrouter.api.util.safeThrowException
 import kotlin.reflect.KClass
 
 /**
@@ -11,7 +11,7 @@ object CreatableFactory {
         return try {
             kClass.java.newInstance()
         } catch (e: Exception) {
-            throwException("create instance of ${kClass.qualifiedName} error, ${e.message}")
+            safeThrowException("create instance of ${kClass.qualifiedName} error, ${e.message}")
             null
         }
     }

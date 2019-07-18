@@ -5,7 +5,7 @@ import club.fdawei.nrouter.api.action.RouteActionBundle
 import club.fdawei.nrouter.api.common.COMMON_TAG
 import club.fdawei.nrouter.api.route.RouteHandler
 import club.fdawei.nrouter.api.route.RouteNodeInfo
-import club.fdawei.nrouter.api.util.throwException
+import club.fdawei.nrouter.api.util.safeThrowException
 import club.fdawei.nrouter.api.util.withFlag
 import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf
@@ -17,8 +17,8 @@ import kotlin.reflect.full.isSubclassOf
 class CreatableRouteHandler : RouteHandler {
     override fun get(data: RouteActionBundle, info: RouteNodeInfo?): Any? {
         if (info == null) {
-            throwException("info is required ,but Null!")
-            throwException("info is required ,but Null!")
+            safeThrowException("info is required ,but Null!")
+            safeThrowException("info is required ,but Null!")
             return null
         }
         if (!info.target.isSubclassOf(Creatable::class)) {
