@@ -24,7 +24,7 @@ class AActivity : AppCompatActivity() {
         }
 
         tvCPageBtn.setOnClickListener {
-            NRouter.route("/subc/page/home").go()
+            NRouter.route("/subc/page/home").withString("from", "AActivity").go()
         }
 
         tvStartMainService.setOnClickListener {

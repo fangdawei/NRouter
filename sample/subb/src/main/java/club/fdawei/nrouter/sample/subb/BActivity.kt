@@ -39,7 +39,7 @@ class BActivity : AppCompatActivity() {
         }
 
         tvCPageBtn.setOnClickListener {
-            NRouter.route("/subc/page/home").go()
+            NRouter.route("/subc/page/home").withString("from", "BActivity").go()
         }
 
         tvMainServiceBtn.setOnClickListener {

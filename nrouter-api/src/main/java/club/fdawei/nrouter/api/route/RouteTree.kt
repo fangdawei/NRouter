@@ -1,7 +1,7 @@
 package club.fdawei.nrouter.api.route
 
-import club.fdawei.nrouter.api.util.ExceptionUtils
 import club.fdawei.nrouter.api.util.ROUTE_PATH_SEPARATOR
+import club.fdawei.nrouter.api.util.safeThrowException
 import java.util.*
 
 /**
@@ -33,7 +33,7 @@ open class RouteTree(
     fun addHandler(path: List<String>, routeNodeMeta: RouteNodeMeta) {
         if (path.isEmpty()) {
             if (this.routeNodeMeta != null) {
-                ExceptionUtils.exception(
+                safeThrowException(
                     "${this.routeNodeMeta!!.target.qualifiedName} and " +
                             "${routeNodeMeta.target.qualifiedName} with same path"
                 )

@@ -18,40 +18,40 @@ class NRouterPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project target) {
-        target.extensions.create('nrouter', NRouterExtension)
+        // create NRouterExtension
+        def nrouterExt = target.extensions.create('nrouter', NRouterExtension)
+        nrouterExt.name(target.name)
 
         // config kapt
-        def kapt = target.extensions.findByName('kapt')
-        if (kapt != null) {
-            kapt.arguments {
-                arg(KaptArgKeys.ARG_MODULE_NAME, target.name)
+        def kaptExt = target.extensions.findByName('kapt')
+        if (kaptExt != null) {
+            kaptExt.arguments {
                 arg(KaptArgKeys.ARG_IS_APP, target.plugins.hasPlugin(AppPlugin))
             }
+            nrouterExt.observeName({ name ->
+                if (name != null) {
+                    kaptExt.arguments {
+                        arg(KaptArgKeys.ARG_MODULE_NAME, name)
+                    }
+                }
+            })
         }
 
-        def android = target.extensions.findByType(AppExtension)
-        if (android != null) {
-            android.registerTransform(new NRouterTransform())
+        def appExt = target.extensions.findByType(AppExtension)
+        if (appExt != null) {
+            appExt.registerTransform(new NRouterTransform())
         }
 
         target.afterEvaluate {
-            def ext = target.extensions.findByName('nrouter') as NRouterExtension
-            if (ext.name == null || ext.name.isEmpty()) {
-                // 未设置name，则使用Project的name
-                ext.name = target.name
-            }
-            if (ext.scheme.support && android != null) {
-                if (ext.scheme.host == null) {
-                    // 未设置host，则使用applicationId
-                    ext.scheme.host = android.defaultConfig.getApplicationId()
-                }
-                android.applicationVariants.all { ApplicationVariant variant ->
+            if (nrouterExt.scheme.support && appExt != null) {
+                nrouterExt.scheme.setHostIfNull(appExt.defaultConfig.getApplicationId())
+                appExt.applicationVariants.all { ApplicationVariant variant ->
                     variant.outputs.each { output ->
                         def task = output.processManifestProvider.get()
                         def manifestFile = new File(task.manifestOutputDirectory.get().asFile,
                                 "AndroidManifest.xml")
                         task.doLast {
-                            ManifestHandler.create(manifestFile, ext.scheme).handle()
+                            ManifestHandler.create(manifestFile, nrouterExt.scheme).handle()
                         }
                     }
                 }

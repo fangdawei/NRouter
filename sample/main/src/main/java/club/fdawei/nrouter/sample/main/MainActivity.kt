@@ -8,6 +8,7 @@ import club.fdawei.nrouter.annotation.Autowired
 import club.fdawei.nrouter.annotation.Route
 import club.fdawei.nrouter.api.NRouter
 import club.fdawei.nrouter.api.component.activity.arg.ActivityOption
+import club.fdawei.nrouter.api.component.activity.arg.PendingTransition
 import club.fdawei.nrouter.api.component.activity.arg.RequestCode
 import club.fdawei.nrouter.sample.base.IPageLogger
 import club.fdawei.nrouter.sample.base.creatable.IService
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 @Route(path = "/main/page/home", desc = "Home页面")
 class MainActivity : AppCompatActivity() {
 
-    @Autowired(name = "/subc/service/cservice")
+    @Autowired(path = "/subc/service/cservice")
     var cService: IService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         tvBPageBtn.setOnClickListener {
-            NRouter.route("/subb/page/home").arg(this).go()
+            NRouter.route("/subb/page/home")
+                .arg(this)
+                .arg(PendingTransition.of(android.R.anim.slide_in_left, android.R.anim.slide_out_right))
+                .go()
         }
 
         tvCPageBtn.setOnClickListener {
@@ -36,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                 .arg(this)
                 .arg(ActivityOption.START_FOR_RESULT)
                 .arg(RequestCode.of(1000))
+                .withString("from", "MainActivity")
                 .go()
         }
 

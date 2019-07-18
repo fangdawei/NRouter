@@ -7,7 +7,7 @@ import kotlin.reflect.KClass
  */
 class TypeDataContainer {
 
-    private val dataMap = linkedMapOf<KClass<out Any>, Any>()
+    private val dataMap = linkedMapOf<KClass<*>, Any>()
 
     fun put(value: Any) {
         dataMap[value::class] = value
@@ -38,7 +38,7 @@ class TypeDataContainer {
         }
     }
 
-    fun remove(kClass: KClass<Any>, assignable: Boolean = false) {
+    fun remove(kClass: KClass<*>, assignable: Boolean = false) {
         if (assignable) {
             val iterator = dataMap.iterator()
             while (iterator.hasNext()) {

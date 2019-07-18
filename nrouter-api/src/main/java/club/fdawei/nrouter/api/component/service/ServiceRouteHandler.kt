@@ -7,7 +7,7 @@ import club.fdawei.nrouter.api.action.RouteActionBundle
 import club.fdawei.nrouter.api.component.service.arg.ServiceOption
 import club.fdawei.nrouter.api.route.RouteHandler
 import club.fdawei.nrouter.api.route.RouteNodeInfo
-import club.fdawei.nrouter.api.util.ExceptionUtils
+import club.fdawei.nrouter.api.util.safeThrowException
 
 /**
  * Created by david on 2019/05/30.
@@ -15,12 +15,12 @@ import club.fdawei.nrouter.api.util.ExceptionUtils
 class ServiceRouteHandler : RouteHandler {
     override fun go(data: RouteActionBundle, info: RouteNodeInfo?) {
         if (info == null) {
-            ExceptionUtils.exception("info is required ,but Null!")
+            safeThrowException("info is required ,but Null!")
             return
         }
         val context = data.args.get(Context::class, assignable = true)
         if (context == null) {
-            ExceptionUtils.exception("context is required, but Not Found!")
+            safeThrowException("context is required, but Not Found!")
             return
         }
         val intent = Intent(context, info.target.java)

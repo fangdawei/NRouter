@@ -14,7 +14,7 @@ import kotlin.reflect.KClass
  */
 object RouteHandlerRepository {
 
-    private val routeHandlerMap = ConcurrentHashMap<KClass<out RouteHandler>, Keeper<out RouteHandler>>()
+    private val routeHandlerMap: MutableMap<KClass<out RouteHandler>, Keeper<out RouteHandler>> = ConcurrentHashMap()
 
     init {
         register(ActivityRouteHandler::class) { ActivityRouteHandler() }
@@ -31,7 +31,7 @@ object RouteHandlerRepository {
         }
     }
 
-    fun register(typeBundle: TypeBundle<RouteHandler>) {
+    fun register(typeBundle: TypeBundle<out RouteHandler>) {
         register(typeBundle.type, typeBundle.creator)
     }
 

@@ -2,6 +2,8 @@ package club.fdawei.nrouter.processor
 
 import club.fdawei.nrouter.annotation.*
 import club.fdawei.nrouter.processor.common.Context
+import club.fdawei.nrouter.processor.common.KAPT_ARG_IS_APP
+import club.fdawei.nrouter.processor.common.KAPT_ARG_MODULE_NAME
 import club.fdawei.nrouter.processor.generator.InjectorGenerator
 import club.fdawei.nrouter.processor.generator.ProviderGenerator
 import club.fdawei.nrouter.processor.log.Logger
@@ -35,8 +37,10 @@ class NRouterProcessor : AbstractProcessor() {
         utilsProvider.elementUtils = processingEnv.elementUtils
         utilsProvider.typeUtils = processingEnv.typeUtils
 
-        context.moduleName = processingEnv.options["moduleName"]
-        context.isAppModule = processingEnv.options["isAppModule"]?.toBoolean() ?: false
+        context.moduleName = processingEnv.options[KAPT_ARG_MODULE_NAME]
+        context.isApp = processingEnv.options[KAPT_ARG_IS_APP]?.toBoolean() ?: false
+
+        logger.w("init $context")
     }
 
     override fun getSupportedAnnotationTypes(): MutableSet<String> {
@@ -54,7 +58,7 @@ class NRouterProcessor : AbstractProcessor() {
     }
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
-        logger.w("process $context")
+        logger.w("process start")
         if (roundEnv == null) {
             return false
         }

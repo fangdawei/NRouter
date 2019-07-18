@@ -14,24 +14,20 @@ object TypeBox {
     const val ROUTE_HANDLER_NAME = "club.fdawei.nrouter.api.route.RouteHandler"
     const val AUTOWIRED_PROVIDER_NAME = "club.fdawei.nrouter.api.inject.AutowiredProvider"
 
-    val ROUTE_TABLE = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.route.RouteTable"
+    val ROUTE_REGISTRY = ClassName.bestGuess(
+        "club.fdawei.nrouter.api.route.RouteRegistry"
     )
 
-    val INJECT_TABLE = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.inject.InjectTable"
+    val INJECT_REGISTRY = ClassName.bestGuess(
+        "club.fdawei.nrouter.api.inject.InjectRegistry"
     )
 
-    val SCHEME_TABLE = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.scheme.SchemeTable"
+    val SCHEME_REGISTRY = ClassName.bestGuess(
+        "club.fdawei.nrouter.api.scheme.SchemeRegistry"
     )
 
     val MULTI_PROVIDER = ClassName.bestGuess(
         "club.fdawei.nrouter.api.provider.MultiProvider"
-    )
-
-    val ABS_APP_PROVIDER = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.provider.AbsAppProvider"
     )
 
     val ROUTE_NODE_META = ClassName.bestGuess(

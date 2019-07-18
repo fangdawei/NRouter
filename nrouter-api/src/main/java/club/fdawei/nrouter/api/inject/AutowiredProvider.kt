@@ -11,13 +11,18 @@ open class AutowiredProvider {
     open fun <T : Any> getAutowired(
         source: Any,
         name: String,
+        path: String,
         type: KClass<T>,
         data: ActionBundle
     ): T? {
-        return NRouter.route(name)
-            .arg(data.args)
-            .withData(data.extras)
-            .withFlags(data.flags)
-            .get(type)
+        return if (path.isNotBlank()) {
+            NRouter.route(path)
+                .arg(data.args)
+                .withData(data.extras)
+                .withFlags(data.flags)
+                .get(type)
+        } else {
+            NRouter.instance().get(type)
+        }
     }
 }

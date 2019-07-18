@@ -7,11 +7,11 @@ import kotlin.reflect.KClass
  * Create by david on 2019/06/07.
  */
 class ProviderMeta(
-    val typeBundle: TypeBundle<AutowiredProvider>
+    val typeBundle: TypeBundle<out AutowiredProvider>
 ) {
-    val sources = mutableListOf<KClass<out Any>>()
+    val sources = mutableListOf<KClass<*>>()
 
-    fun addSource(kClass: KClass<out Any>) {
+    fun addSource(kClass: KClass<*>) {
         sources.add(kClass)
     }
 }

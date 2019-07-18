@@ -1,16 +1,16 @@
 package club.fdawei.nrouter.api.route
 
-import club.fdawei.nrouter.api.util.ExceptionUtils
+import club.fdawei.nrouter.api.util.safeThrowException
 import club.fdawei.nrouter.api.util.splitRoutePath
 
 /**
  * Created by david on 2019/05/29.
  */
-class RouteTable : RouteTree("", "") {
+class RouteTable : RouteTree("", ""), RouteRegistry {
 
-    fun registerRouteNode(routeNodeMeta: RouteNodeMeta) {
+    override fun registerRouteNode(routeNodeMeta: RouteNodeMeta) {
         if (routeNodeMeta.path.isEmpty()) {
-            ExceptionUtils.exception("Path illegal, $routeNodeMeta")
+            safeThrowException("Path illegal, $routeNodeMeta")
             return
         }
         val pathSplitList = routeNodeMeta.path.splitRoutePath()
@@ -18,7 +18,7 @@ class RouteTable : RouteTree("", "") {
         RouteHandlerRepository.register(routeNodeMeta.handlerBundle)
     }
 
-    fun registerInterceptor(interceptor: InterceptorMeta) {
+    override fun registerInterceptor(interceptor: InterceptorMeta) {
         val pathSplitList = interceptor.interceptPath.splitRoutePath()
         addInterceptor(pathSplitList, interceptor)
     }

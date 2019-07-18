@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment
 import club.fdawei.nrouter.api.action.RouteActionBundle
 import club.fdawei.nrouter.api.route.RouteHandler
 import club.fdawei.nrouter.api.route.RouteNodeInfo
-import club.fdawei.nrouter.api.util.ExceptionUtils
+import club.fdawei.nrouter.api.util.safeThrowException
 
 /**
  * Created by david on 2019/05/30.
@@ -12,7 +12,7 @@ import club.fdawei.nrouter.api.util.ExceptionUtils
 class FragmentRouteHandler : RouteHandler {
     override fun get(data: RouteActionBundle, info: RouteNodeInfo?): Any? {
         if (info == null) {
-            ExceptionUtils.exception("info is required ,but Null!")
+            safeThrowException("info is required ,but Null!")
             return null
         }
         return try {
@@ -22,7 +22,7 @@ class FragmentRouteHandler : RouteHandler {
             }
             instance
         } catch (e: Exception) {
-            ExceptionUtils.exception("create fragment error, ${e.message}")
+            safeThrowException("create fragment error, ${e.message}")
             null
         }
     }

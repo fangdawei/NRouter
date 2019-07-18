@@ -8,11 +8,12 @@ import kotlin.reflect.KClass
 /**
  * Created by david on 2019/06/04.
  */
-class FragmentAutowiredProvider : AutowiredProvider() {
+open class FragmentAutowiredProvider : AutowiredProvider() {
     @Suppress("UNCHECKED_CAST", "DEPRECATION")
     override fun <T : Any> getAutowired(
         source: Any,
         name: String,
+        path: String,
         type: KClass<T>,
         data: ActionBundle
     ): T? {
@@ -39,7 +40,7 @@ class FragmentAutowiredProvider : AutowiredProvider() {
             value = extra as T
         }
         if (value == null) {
-            value = super.getAutowired(source, name, type, data)
+            value = super.getAutowired(source, name, path, type, data)
         }
         return value
     }

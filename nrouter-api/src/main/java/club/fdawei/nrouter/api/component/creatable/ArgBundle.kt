@@ -5,15 +5,14 @@ import android.os.Bundle
 /**
  * Created by david on 2019/06/04.
  */
-class Context private constructor(
+class ArgBundle private constructor(
     val flags: Int,
     val extras: Bundle
 ) {
     companion object {
-
         @JvmStatic
-        fun of(flags: Int, extras: Bundle): Context {
-            return Context(flags, Bundle().apply {
+        fun of(flags: Int, extras: Bundle): ArgBundle {
+            return ArgBundle(flags, Bundle().apply {
                 putAll(extras)
             })
         }

@@ -20,12 +20,12 @@ fun TypeElement.identityName(pkgName: String): String {
 }
 
 fun Element.kotlinType(): TypeName {
-    val ktName = JavaToKotlinClassMap.INSTANCE.mapJavaToKotlin(
+    val ktTypeName = JavaToKotlinClassMap.INSTANCE.mapJavaToKotlin(
         FqName(this.asType().asTypeName().toString())
     )?.asSingleFqName()?.asString()
-    return if (ktName == null) {
+    return if (ktTypeName == null) {
         this.asType().asTypeName()
     } else {
-        ClassName.bestGuess(ktName)
+        ClassName.bestGuess(ktTypeName)
     }
 }

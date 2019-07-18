@@ -6,6 +6,6 @@ import kotlin.reflect.KClass
  * Created by david on 2019/07/02.
  */
 interface InstanceAction {
-    fun register(clz: KClass<out Any>, instance: Any)
+    fun register(clz: KClass<*>, instance: Any)
     fun <T : Any> get(clz: KClass<T>): T?
 }

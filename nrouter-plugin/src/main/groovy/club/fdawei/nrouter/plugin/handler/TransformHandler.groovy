@@ -2,6 +2,7 @@ package club.fdawei.nrouter.plugin.handler
 
 import club.fdawei.nrouter.plugin.base.ProviderInfo
 import club.fdawei.nrouter.plugin.common.ClassInfo
+import club.fdawei.nrouter.plugin.common.LogTag
 import club.fdawei.nrouter.plugin.log.PluginLogger
 import club.fdawei.nrouter.plugin.util.ClassUtils
 import com.android.build.api.transform.Format
@@ -32,7 +33,7 @@ class TransformHandler {
     void transform() {
         invocation.inputs.each {
             it.directoryInputs.each { dir ->
-                PluginLogger.i("transform", "${dir.scopes}, ${dir.file.absolutePath}, ${dir.contentTypes}")
+                PluginLogger.i(LogTag.COMMON, "transform ${dir.scopes}, ${dir.file.absolutePath}, ${dir.contentTypes}")
                 classPool.appendClassPath(dir.file.absolutePath)
                 collectInDir(dir.file)
 
@@ -41,7 +42,7 @@ class TransformHandler {
                 }
             }
             it.jarInputs.each { jar ->
-                PluginLogger.i("transform", "${jar.scopes}, ${jar.file.absolutePath}, ${jar.contentTypes}")
+                PluginLogger.i(LogTag.COMMON, "transform ${jar.scopes}, ${jar.file.absolutePath}, ${jar.contentTypes}")
                 classPool.appendClassPath(jar.file.absolutePath)
                 collectInJar(jar.file)
             }
@@ -68,7 +69,7 @@ class TransformHandler {
             appProvider.addMethod(CtNewMethod.make(methodSrcBuilder.toString(), appProvider))
             appProvider.writeFile(projectClassesDir.absolutePath)
 
-            PluginLogger.i("", "create class ${ClassInfo.MultiProvider.NAME}")
+            PluginLogger.i(LogTag.COMMON, "generate class ${ClassInfo.AbsAppProvider.NAME}")
         }
 
         invocation.inputs.each {
@@ -91,7 +92,7 @@ class TransformHandler {
                 def relativePath = FileUtils.relativePath(it, dir)
                 def className = ClassUtils.getClassName(relativePath)
                 if (ClassInfo.ModuleProvider.isModuleProvider(relativePath)) {
-                    PluginLogger.i("", "${className}")
+                    PluginLogger.i(LogTag.COMMON, "find ${className}")
                     providerList.add(new ProviderInfo(dir, className))
                 }
             }
@@ -108,7 +109,7 @@ class TransformHandler {
             }
             if (ClassInfo.ModuleProvider.isModuleProvider(jarEntry.name)) {
                 def className = ClassUtils.getClassName(jarEntry.name)
-                PluginLogger.i("", "${className}")
+                PluginLogger.i(LogTag.COMMON, "find ${className}")
                 providerList.add(new ProviderInfo(jar, className))
             }
         }
