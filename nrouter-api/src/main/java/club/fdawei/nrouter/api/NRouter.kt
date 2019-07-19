@@ -36,7 +36,7 @@ object NRouter {
     @JvmStatic
     fun init(context: Context) {
         if (hasInitialized) {
-            safeThrowException("init has been called!")
+            safeThrowException("init has been called! Do not call again!")
             return
         }
         addEnv(context)
@@ -51,15 +51,15 @@ object NRouter {
         envs.put(env)
     }
 
-    fun checkIfInitialized() {
+    private fun checkHasInitialized() {
         if (!hasInitialized) {
-            safeThrowException("init should be call first!")
+            safeThrowException("Not yet initialized, please call init first!")
         }
     }
 
     @JvmStatic
     fun route(uri: String): RouteAction {
-        checkIfInitialized()
+        checkHasInitialized()
         return RouteActionImpl(uri) {
             val args = it.uri.parseRouteArgs()
             args.forEach { (k, v) ->
@@ -72,7 +72,7 @@ object NRouter {
 
     @JvmStatic
     fun injector(): InjectAction {
-        checkIfInitialized()
+        checkHasInitialized()
         return InjectActionImpl({
             injectManager.getInjector(it)
         }, {
@@ -82,13 +82,13 @@ object NRouter {
 
     @JvmStatic
     fun instance(): InstanceAction {
-        checkIfInitialized()
+        checkHasInitialized()
         return instanceManager
     }
 
     @JvmStatic
     internal fun scheme(intent: Intent) {
-        checkIfInitialized()
+        checkHasInitialized()
         schemeManager.handleScheme(intent)
     }
 }
