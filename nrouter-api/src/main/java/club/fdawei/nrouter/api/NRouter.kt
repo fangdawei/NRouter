@@ -57,6 +57,11 @@ object NRouter {
         }
     }
 
+    internal fun handleScheme(intent: Intent) {
+        checkHasInitialized()
+        schemeManager.handleScheme(intent)
+    }
+
     @JvmStatic
     fun route(uri: String): RouteAction {
         checkHasInitialized()
@@ -71,6 +76,12 @@ object NRouter {
     }
 
     @JvmStatic
+    fun instance(): InstanceAction {
+        checkHasInitialized()
+        return instanceManager
+    }
+
+    @JvmStatic
     fun injector(): InjectAction {
         checkHasInitialized()
         return InjectActionImpl({
@@ -78,17 +89,5 @@ object NRouter {
         }, {
             injectManager.getProvider(it)
         })
-    }
-
-    @JvmStatic
-    fun instance(): InstanceAction {
-        checkHasInitialized()
-        return instanceManager
-    }
-
-    @JvmStatic
-    internal fun scheme(intent: Intent) {
-        checkHasInitialized()
-        schemeManager.handleScheme(intent)
     }
 }
