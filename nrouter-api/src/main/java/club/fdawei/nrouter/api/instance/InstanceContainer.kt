@@ -7,7 +7,7 @@ import kotlin.reflect.KClass
 /**
  * Created by david on 2019/07/02.
  */
-class InstanceManager : InstanceAction {
+class InstanceContainer : InstanceAction {
 
     private val instanceMap: MutableMap<KClass<*>, Any> = ConcurrentHashMap()
 

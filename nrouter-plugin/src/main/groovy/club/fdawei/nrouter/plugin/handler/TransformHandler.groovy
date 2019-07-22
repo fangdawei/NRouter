@@ -69,7 +69,7 @@ class TransformHandler {
             appProvider.addMethod(CtNewMethod.make(methodSrcBuilder.toString(), appProvider))
             appProvider.writeFile(projectClassesDir.absolutePath)
 
-            PluginLogger.i(LogTag.COMMON, "generate class ${ClassInfo.AbsAppProvider.NAME}")
+            PluginLogger.i(LogTag.COMMON, "generate class ${ClassInfo.AppProvider.NAME}")
         }
 
         invocation.inputs.each {
@@ -89,9 +89,8 @@ class TransformHandler {
     private void collectInDir(File dir) {
         dir.eachFileRecurse {
             if (!it.directory) {
-                def relativePath = FileUtils.relativePath(it, dir)
-                def className = ClassUtils.getClassName(relativePath)
-                if (ClassInfo.ModuleProvider.isModuleProvider(relativePath)) {
+                def className = ClassUtils.getClassName(dir, it)
+                if (ClassInfo.ModuleProvider.isModuleProvider(className)) {
                     PluginLogger.i(LogTag.COMMON, "find ${className}")
                     providerList.add(new ProviderInfo(dir, className))
                 }
@@ -107,8 +106,8 @@ class TransformHandler {
             if (jarEntry.directory) {
                 continue
             }
-            if (ClassInfo.ModuleProvider.isModuleProvider(jarEntry.name)) {
-                def className = ClassUtils.getClassName(jarEntry.name)
+            def className = ClassUtils.getClassName(jarEntry.name)
+            if (ClassInfo.ModuleProvider.isModuleProvider(className)) {
                 PluginLogger.i(LogTag.COMMON, "find ${className}")
                 providerList.add(new ProviderInfo(jar, className))
             }

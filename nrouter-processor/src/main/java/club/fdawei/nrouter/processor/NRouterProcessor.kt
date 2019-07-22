@@ -40,7 +40,7 @@ class NRouterProcessor : AbstractProcessor() {
         context.moduleName = processingEnv.options[KAPT_ARG_MODULE_NAME]
         context.isApp = processingEnv.options[KAPT_ARG_IS_APP]?.toBoolean() ?: false
 
-        logger.w("init $context")
+        logger.i("init $context")
     }
 
     override fun getSupportedAnnotationTypes(): MutableSet<String> {
@@ -58,7 +58,6 @@ class NRouterProcessor : AbstractProcessor() {
     }
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
-        logger.w("process start")
         if (roundEnv == null) {
             return false
         }

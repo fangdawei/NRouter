@@ -5,8 +5,8 @@ package club.fdawei.nrouter.processor.generator
  */
 object ClassInfo {
 
-    const val PROVIDER_PACKAGE = "club.fdawei.nrouter.providers"
-    const val PROVIDER_NAME_PREFIX = "Module_"
+    const val PROVIDER_PACKAGE = "club.fdawei.nrouter.generated.providers"
+    const val PROVIDER_NAME_PREFIX = "NRouter_"
     const val PROVIDER_NAME_SUFFIX = "_Provider"
     const val INJECTOR_NAME_SUFFIX = "_Injector"
 

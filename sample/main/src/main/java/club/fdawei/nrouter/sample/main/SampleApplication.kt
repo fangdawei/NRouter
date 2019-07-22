@@ -14,6 +14,6 @@ class SampleApplication : Application() {
         NRouter.debug = BuildConfig.DEBUG
         NRouter.init(this)
 
-        NRouter.instance().register(IPageLogger::class, PageLogger())
+        NRouter.container().register(IPageLogger::class, PageLogger())
     }
 }

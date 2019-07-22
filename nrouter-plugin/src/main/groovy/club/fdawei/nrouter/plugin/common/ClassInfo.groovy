@@ -16,13 +16,13 @@ final class ClassInfo {
     }
 
     final static class ModuleProvider {
-        static boolean isModuleProvider(String fileName) {
-            return fileName ==~ /^.*Module_.+_Provider\.class$/
+        static boolean isModuleProvider(String className) {
+            return className ==~ /^club\.fdawei\.nrouter\.generated\.providers\.NRouter_\S+_Provider$/
         }
     }
 
     final static class AppProvider {
-        static final String NAME = 'club.fdawei.nrouter.providers.App_Provider'
+        static final String NAME = 'club.fdawei.nrouter.generated.providers.NRouter_AppProvider'
     }
 
     final static class SchemeDispatchActivity {

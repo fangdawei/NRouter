@@ -5,7 +5,7 @@ import android.content.Intent
 import club.fdawei.nrouter.api.action.*
 import club.fdawei.nrouter.api.base.TypeDataContainer
 import club.fdawei.nrouter.api.inject.InjectManager
-import club.fdawei.nrouter.api.instance.InstanceManager
+import club.fdawei.nrouter.api.instance.InstanceContainer
 import club.fdawei.nrouter.api.log.DefaultLogger
 import club.fdawei.nrouter.api.log.ILogger
 import club.fdawei.nrouter.api.provider.ProviderLoader
@@ -24,8 +24,8 @@ object NRouter {
     private val providerLoader = ProviderLoader()
     private val routeManager = RouteManager()
     private val injectManager = InjectManager()
-    private val instanceManager = InstanceManager()
     private val schemeManager = SchemeManager()
+    private val instanceContainer = InstanceContainer()
 
     @JvmField
     var debug: Boolean = false
@@ -76,9 +76,9 @@ object NRouter {
     }
 
     @JvmStatic
-    fun instance(): InstanceAction {
+    fun container(): InstanceAction {
         checkHasInitialized()
-        return instanceManager
+        return instanceContainer
     }
 
     @JvmStatic

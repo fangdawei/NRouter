@@ -57,12 +57,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         tvPageLog.setOnClickListener {
-            NRouter.instance().get(IPageLogger::class)?.printLog()
+            NRouter.container().get(IPageLogger::class)?.printLog()
         }
 
         NRouter.injector().inject(this)
 
-        NRouter.instance().get(IPageLogger::class)?.logPage("MainActivity")
+        NRouter.container().get(IPageLogger::class)?.logPage("MainActivity")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
