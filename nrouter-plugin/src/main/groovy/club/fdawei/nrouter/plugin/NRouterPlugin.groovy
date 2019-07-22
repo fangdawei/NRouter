@@ -46,7 +46,7 @@ class NRouterPlugin implements Plugin<Project> {
             if (nrouterExt.scheme.support && appExt != null) {
                 nrouterExt.scheme.setHostIfNull(appExt.defaultConfig.getApplicationId())
                 appExt.applicationVariants.all { ApplicationVariant variant ->
-                    variant.outputs.each { output ->
+                    variant.outputs.all { output ->
                         def task = output.processManifestProvider.get()
                         def manifestFile = new File(task.manifestOutputDirectory.get().asFile,
                                 "AndroidManifest.xml")
