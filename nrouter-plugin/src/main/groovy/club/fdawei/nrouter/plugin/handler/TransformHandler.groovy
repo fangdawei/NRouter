@@ -33,7 +33,6 @@ class TransformHandler {
     void transform() {
         invocation.inputs.each {
             it.directoryInputs.each { dir ->
-                PluginLogger.i(LogTag.COMMON, "transform ${dir.scopes}, ${dir.file.absolutePath}, ${dir.contentTypes}")
                 classPool.appendClassPath(dir.file.absolutePath)
                 collectInDir(dir.file)
 
@@ -42,7 +41,6 @@ class TransformHandler {
                 }
             }
             it.jarInputs.each { jar ->
-                PluginLogger.i(LogTag.COMMON, "transform ${jar.scopes}, ${jar.file.absolutePath}, ${jar.contentTypes}")
                 classPool.appendClassPath(jar.file.absolutePath)
                 collectInJar(jar.file)
             }
@@ -91,7 +89,7 @@ class TransformHandler {
             if (!it.directory) {
                 def className = ClassUtils.getClassName(dir, it)
                 if (ClassInfo.ModuleProvider.isModuleProvider(className)) {
-                    PluginLogger.i(LogTag.COMMON, "find ${className}")
+                    PluginLogger.i(LogTag.COMMON, "find ${className} in dir(${dir.absolutePath})")
                     providerList.add(new ProviderInfo(dir, className))
                 }
             }
@@ -108,7 +106,7 @@ class TransformHandler {
             }
             def className = ClassUtils.getClassName(jarEntry.name)
             if (ClassInfo.ModuleProvider.isModuleProvider(className)) {
-                PluginLogger.i(LogTag.COMMON, "find ${className}")
+                PluginLogger.i(LogTag.COMMON, "find ${className} in jar(${jar.absolutePath})")
                 providerList.add(new ProviderInfo(jar, className))
             }
         }
