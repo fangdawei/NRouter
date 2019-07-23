@@ -1,6 +1,5 @@
-package club.fdawei.nrouter.plugin
+package club.fdawei.nrouter.plugin.handler
 
-import club.fdawei.nrouter.plugin.handler.TransformHandler
 import com.android.build.api.transform.QualifiedContent
 import com.android.build.api.transform.Transform
 import com.android.build.api.transform.TransformException

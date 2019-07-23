@@ -3,6 +3,7 @@ package club.fdawei.nrouter.plugin
 import club.fdawei.nrouter.plugin.common.KaptArgKeys
 import club.fdawei.nrouter.plugin.ext.NRouterExtension
 import club.fdawei.nrouter.plugin.handler.ManifestHandler
+import club.fdawei.nrouter.plugin.handler.NRouterTransform
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.api.ApplicationVariant
