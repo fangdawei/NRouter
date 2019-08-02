@@ -337,10 +337,6 @@ class ProviderCollector implements IHandler {
             getProviderMap(fromKey).remove(className)
         }
 
-        void put(String fromKey, List<ProviderInfo> providers) {
-            data.put(fromKey, providers)
-        }
-
         void remove(String fromKey) {
             data.remove(fromKey)
         }
