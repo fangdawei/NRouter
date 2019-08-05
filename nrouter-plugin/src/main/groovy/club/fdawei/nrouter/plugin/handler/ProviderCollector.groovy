@@ -36,7 +36,7 @@ class ProviderCollector implements IHandler {
 
     @Override
     void handle() {
-        PluginLogger.i(LogTag.COMMON, "collect provider, incremental=${invocation.incremental}")
+        PluginLogger.i(LogTag.COMMON, "collect provider start, incremental=${invocation.incremental}")
         long startTime = System.currentTimeMillis()
         if (invocation.incremental && providerContainer.loadFromCache()) {
             incrementalProcess()
@@ -231,7 +231,7 @@ class ProviderCollector implements IHandler {
         collector.project = project
         collector.invocation = invocation
         def incrementalDir = new File(project.buildDir,
-                "intermediates/incremental/collect${invocation.context.variantName.capitalize()}Providers/")
+                "intermediates/incremental/collectNRouterProviders/${invocation.context.variantName}")
         collector.providerContainer.cacheDir = incrementalDir
         return collector
     }
