@@ -1,14 +1,16 @@
 package club.fdawei.nrouter.plugin.util
 
-import com.android.utils.FileUtils
-
 /**
  * Created by david on 2019/05/29.
  */
 class ClassUtils {
 
     static String getClassName(File dir, File classFile) {
-        def relativePath = FileUtils.relativePath(classFile, dir)
+        def dirPath = dir.absolutePath
+        if (!dirPath.endsWith(File.separator)) {
+            dirPath = dirPath.concat(File.separator)
+        }
+        def relativePath = classFile.absolutePath.replace(dirPath, '')
         return getClassName(relativePath)
     }
 
