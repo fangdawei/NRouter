@@ -49,7 +49,7 @@ class NRouterProcessor : AbstractProcessor() {
             Interceptor::class.java.canonicalName,
             Provider::class.java.canonicalName,
             Autowired::class.java.canonicalName,
-            Scheme::class.java.canonicalName
+            SchemeAware::class.java.canonicalName
         )
     }
 
@@ -116,7 +116,7 @@ class NRouterProcessor : AbstractProcessor() {
     }
 
     private fun collectSchemeWith(roundEnv: RoundEnvironment) {
-        val elements = roundEnv.getElementsAnnotatedWith(Scheme::class.java)
+        val elements = roundEnv.getElementsAnnotatedWith(SchemeAware::class.java)
         elements.forEach {
             if (it.kind == ElementKind.CLASS) {
                 providerGenerator.addSchemeWith(it as TypeElement)

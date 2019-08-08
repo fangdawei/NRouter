@@ -46,7 +46,7 @@ class BActivity : AppCompatActivity() {
             serviceBinder?.printName()
         }
 
-        NRouter.container().get(IPageLogger::class)?.logPage("BActivity")
+        NRouter.route("/common/page/logger").get(IPageLogger::class)?.logPage("BActivity")
     }
 
     override fun onStart() {

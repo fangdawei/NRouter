@@ -17,7 +17,7 @@ open class RouteTree(
     }
     protected var routeNodeMeta: RouteNodeMeta? = null
     protected val interceptors = LinkedList<InterceptorMeta>()
-    protected val childTrees: MutableMap<String, RouteTree> by lazy { mutableMapOf<String, RouteTree>() }
+    protected val childTrees by lazy { mutableMapOf<String, RouteTree>() }
 
     private fun getOrCreateChildTree(key: String): RouteTree {
         var childTree = childTrees[key]

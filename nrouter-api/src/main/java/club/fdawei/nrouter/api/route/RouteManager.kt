@@ -4,6 +4,7 @@ import club.fdawei.nrouter.api.NRouter
 import club.fdawei.nrouter.api.action.RouteActionBundle
 import club.fdawei.nrouter.api.common.COMMON_TAG
 import club.fdawei.nrouter.api.provider.MultiProvider
+import club.fdawei.nrouter.api.registry.RouteRegistry
 import club.fdawei.nrouter.api.util.parseRoutePath
 
 /**
@@ -26,12 +27,16 @@ class RouteManager {
         } else {
             RouteResult(
                 result.routeNodeMeta?.nodeInfo,
-                InterceptInvoker.of(result.sortedInterceptors).invoke(bundle, result.routeHandler)
+                InterceptInvoker.of(result.interceptors).invoke(bundle, result.routeHandler)
             )
         }
     }
 
     private fun check(data: RouteActionBundle, result: AddressingResult): Boolean {
         return true
+    }
+
+    fun registry(): RouteRegistry {
+        return routeTable
     }
 }

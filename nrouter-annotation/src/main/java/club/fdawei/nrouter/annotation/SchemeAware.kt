@@ -5,7 +5,7 @@ package club.fdawei.nrouter.annotation
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
-annotation class Scheme(
+annotation class SchemeAware(
     val priority: Int = DEFAULT_PRIORITY
 ) {
     companion object {

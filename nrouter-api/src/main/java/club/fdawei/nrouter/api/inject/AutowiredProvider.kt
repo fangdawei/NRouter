@@ -22,7 +22,7 @@ open class AutowiredProvider {
                 .withFlags(data.flags)
                 .get(type)
         } else {
-            NRouter.container().get(type)
+            null
         }
     }
 }

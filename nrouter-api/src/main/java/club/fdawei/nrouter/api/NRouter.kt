@@ -1,14 +1,16 @@
 package club.fdawei.nrouter.api
 
 import android.content.Context
-import android.content.Intent
-import club.fdawei.nrouter.api.action.*
+import club.fdawei.nrouter.api.action.InjectAction
+import club.fdawei.nrouter.api.action.InjectActionImpl
+import club.fdawei.nrouter.api.action.RouteAction
+import club.fdawei.nrouter.api.action.RouteActionImpl
 import club.fdawei.nrouter.api.base.TypeDataContainer
 import club.fdawei.nrouter.api.inject.InjectManager
-import club.fdawei.nrouter.api.instance.InstanceContainer
 import club.fdawei.nrouter.api.log.DefaultLogger
 import club.fdawei.nrouter.api.log.ILogger
 import club.fdawei.nrouter.api.provider.ProviderLoader
+import club.fdawei.nrouter.api.registry.RegistryDispatcher
 import club.fdawei.nrouter.api.route.RouteManager
 import club.fdawei.nrouter.api.scheme.SchemeManager
 import club.fdawei.nrouter.api.util.parseRouteArgs
@@ -20,18 +22,28 @@ import club.fdawei.nrouter.api.util.safeThrowException
 object NRouter {
 
     private val envs = TypeDataContainer()
-    private var hasInitialized = false
+
     private val providerLoader = ProviderLoader()
-    private val routeManager = RouteManager()
-    private val injectManager = InjectManager()
-    private val schemeManager = SchemeManager()
-    private val instanceContainer = InstanceContainer()
+
+    internal val routeManager = RouteManager()
+    internal val injectManager = InjectManager()
+    internal val schemeManager = SchemeManager()
+
+    private val registryDispatcher by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        RegistryDispatcher().apply {
+            routeRegistry = routeManager.registry()
+            injectRegistry = injectManager.registry()
+            schemeRegistry = schemeManager.registry()
+        }
+    }
 
     @JvmField
     var debug: Boolean = false
 
     @JvmField
     var logger: ILogger = DefaultLogger()
+
+    private var hasInitialized = false
 
     @JvmStatic
     fun init(context: Context) {
@@ -57,9 +69,10 @@ object NRouter {
         }
     }
 
-    internal fun handleScheme(intent: Intent) {
+    @JvmStatic
+    fun registry(): RegistryDispatcher {
         checkHasInitialized()
-        schemeManager.handleScheme(intent)
+        return registryDispatcher
     }
 
     @JvmStatic
@@ -73,12 +86,6 @@ object NRouter {
             it.args.putAll(envs)
             routeManager.route(it)
         }
-    }
-
-    @JvmStatic
-    fun container(): InstanceAction {
-        checkHasInitialized()
-        return instanceContainer
     }
 
     @JvmStatic

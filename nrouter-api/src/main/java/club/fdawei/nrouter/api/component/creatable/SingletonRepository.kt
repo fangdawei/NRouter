@@ -9,10 +9,6 @@ object SingletonRepository {
 
     private val instanceMap = mutableMapOf<KClass<out Creatable>, Creatable>()
 
-    fun get(kClass: KClass<*>): Any? {
-        return instanceMap[kClass]
-    }
-
     fun getOrCreate(kClass: KClass<out Creatable>): Any? {
         return get(kClass) ?: synchronized(instanceMap) {
             get(kClass) ?: CreatableFactory.create(kClass).apply {
@@ -21,6 +17,10 @@ object SingletonRepository {
                 }
             }
         }
+    }
+
+    private fun get(kClass: KClass<*>): Any? {
+        return instanceMap[kClass]
     }
 
     private fun put(kClass: KClass<out Creatable>, instance: Creatable) {

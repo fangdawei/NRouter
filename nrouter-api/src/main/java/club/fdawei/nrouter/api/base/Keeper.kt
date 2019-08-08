@@ -6,7 +6,7 @@ package club.fdawei.nrouter.api.base
 class Keeper<T> private constructor(
     private val creator: () -> T
 ) {
-    val instance by lazy { creator.invoke() }
+    val instance by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { creator.invoke() }
 
     companion object {
         fun <T : Any> of(creator: () -> T): Keeper<T> {

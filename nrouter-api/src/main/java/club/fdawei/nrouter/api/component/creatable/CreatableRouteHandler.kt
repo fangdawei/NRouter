@@ -18,7 +18,6 @@ class CreatableRouteHandler : RouteHandler {
     override fun get(data: RouteActionBundle, info: RouteNodeInfo?): Any? {
         if (info == null) {
             safeThrowException("info is required ,but Null!")
-            safeThrowException("info is required ,but Null!")
             return null
         }
         if (!info.target.isSubclassOf(Creatable::class)) {

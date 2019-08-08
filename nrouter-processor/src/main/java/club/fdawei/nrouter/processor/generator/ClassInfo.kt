@@ -19,17 +19,15 @@ object ClassInfo {
     }
 
     object RouteRegistry {
-        const val FUN_REGISTER_ROUTE_NODE = "registerRouteNode"
-        const val FUN_REGISTER_INTERCEPTOR = "registerInterceptor"
+        const val FUN_REGISTER = "register"
     }
 
     object InjectRegistry {
-        const val FUN_REGISTER_PROVIDER = "registerProvider"
-        const val FUN_REGISTER_INJECTOR = "registerInjector"
+        const val FUN_REGISTER = "register"
     }
 
     object SchemeRegistry {
-        const val FUN_REGISTER_SCHEME = "registerScheme"
+        const val FUN_REGISTER = "register"
     }
 
     object MultiProvider {

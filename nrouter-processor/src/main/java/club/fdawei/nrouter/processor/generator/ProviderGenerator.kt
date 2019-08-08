@@ -3,7 +3,7 @@ package club.fdawei.nrouter.processor.generator
 import club.fdawei.nrouter.annotation.Interceptor
 import club.fdawei.nrouter.annotation.Provider
 import club.fdawei.nrouter.annotation.Route
-import club.fdawei.nrouter.annotation.Scheme
+import club.fdawei.nrouter.annotation.SchemeAware
 import club.fdawei.nrouter.processor.common.Context
 import club.fdawei.nrouter.processor.util.UtilsProvider
 import club.fdawei.nrouter.processor.util.annotationValue
@@ -143,7 +143,7 @@ class ProviderGenerator(
             }
             if (handler != null) {
                 funBuilder.addStatement(
-                    "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.RouteRegistry.FUN_REGISTER_ROUTE_NODE}" +
+                    "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.RouteRegistry.FUN_REGISTER}" +
                             "(%T(%S, %T::class, %L, %S, %T(%T::class, { %T() })))",
                     TypeBox.ROUTE_NODE_META, path, it.asType(), flags, desc, TypeBox.TYPE_BUNDLE, handler, handler
                 )
@@ -158,7 +158,7 @@ class ProviderGenerator(
             val desc = interceptor.desc
             val interceptorType = it.asClassName()
             funBuilder.addStatement(
-                "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.RouteRegistry.FUN_REGISTER_INTERCEPTOR}" +
+                "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.RouteRegistry.FUN_REGISTER}" +
                         "(%T(%S, %L, %S, %T(%T::class, { %T() })))",
                 TypeBox.INTERCEPTOR_META, path, priority, desc, TypeBox.TYPE_BUNDLE, interceptorType, interceptorType
             )
@@ -191,7 +191,7 @@ class ProviderGenerator(
                 val codeBuilder = CodeBlock.builder()
                 codeBuilder.addStatement(
                     "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}." +
-                            "${ClassInfo.InjectRegistry.FUN_REGISTER_PROVIDER}(%T(%T(%T::class, { %T() })).apply {",
+                            "${ClassInfo.InjectRegistry.FUN_REGISTER}(%T(%T(%T::class, { %T() })).apply {",
                     TypeBox.PROVIDER_META, TypeBox.TYPE_BUNDLE, providerType, providerType
                 )
                 codeBuilder.indent()
@@ -210,7 +210,7 @@ class ProviderGenerator(
             val injectorName = it.identityName(pkgName) + ClassInfo.INJECTOR_NAME_SUFFIX
             val injectorType = ClassName.bestGuess("$pkgName.$injectorName")
             funBuilder.addStatement(
-                "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.InjectRegistry.FUN_REGISTER_INJECTOR}" +
+                "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.InjectRegistry.FUN_REGISTER}" +
                         "(%T(%T::class, %T(%T::class, { %T() })))",
                 TypeBox.INJECTOR_META, it.asClassName(), TypeBox.TYPE_BUNDLE, injectorType, injectorType
             )
@@ -229,10 +229,10 @@ class ProviderGenerator(
 
         funBuilder.addComment("register scheme")
         schemeElements.forEach {
-            val scheme = it.getAnnotation(Scheme::class.java)
+            val scheme = it.getAnnotation(SchemeAware::class.java)
             val handlerType = it.asClassName()
             funBuilder.addStatement(
-                "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.SchemeRegistry.FUN_REGISTER_SCHEME}" +
+                "${ClassInfo.MultiProvider.FUN_ARG_REGISTRY}.${ClassInfo.SchemeRegistry.FUN_REGISTER}" +
                         "(%T(%L, %T(%T::class, { %T() })))",
                 TypeBox.SCHEME_META, scheme.priority, TypeBox.TYPE_BUNDLE, handlerType, handlerType
             )
