@@ -50,6 +50,6 @@ class CActivity : AppCompatActivity() {
                 .commit()
         }
 
-        NRouter.instance().get(IPageLogger::class)?.logPage("CActivity")
+        NRouter.route("/common/page/logger").get(IPageLogger::class)?.logPage("CActivity")
     }
 }

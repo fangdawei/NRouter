@@ -9,7 +9,7 @@ class InterceptorMeta(
     val interceptPath: String,
     val priority: Int,
     val desc: String,
-    private val typeBundle: TypeBundle<out RouteInterceptor>
+    val typeBundle: TypeBundle<out RouteInterceptor>
 ) {
     val interceptor by lazy { typeBundle.creator.invoke() }
 
@@ -17,7 +17,7 @@ class InterceptorMeta(
         return "$desc{" +
                 "interceptPath='$interceptPath', " +
                 "priority=$priority, " +
-                "interceptor=${interceptor::class.qualifiedName}" +
+                "interceptor=${typeBundle.type.qualifiedName}" +
                 "}"
     }
 }

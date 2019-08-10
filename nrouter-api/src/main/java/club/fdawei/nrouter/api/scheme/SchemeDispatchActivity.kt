@@ -13,7 +13,7 @@ class SchemeDispatchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val uri = intent.data
         NRouter.logger.i(COMMON_TAG, "dispatch scheme=$uri")
-        NRouter.scheme(intent)
+        NRouter.schemeManager.handleScheme(intent)
         finish()
     }
 }

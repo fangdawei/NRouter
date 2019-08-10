@@ -3,6 +3,7 @@ package club.fdawei.nrouter.api.inject
 import club.fdawei.nrouter.api.NRouter
 import club.fdawei.nrouter.api.common.COMMON_TAG
 import club.fdawei.nrouter.api.provider.MultiProvider
+import club.fdawei.nrouter.api.registry.InjectRegistry
 
 /**
  * Created by david on 2019/06/05.
@@ -22,5 +23,9 @@ class InjectManager {
 
     fun getProvider(source: Any): AutowiredProvider? {
         return injectTable.getProvider(source::class)
+    }
+
+    fun registry(): InjectRegistry {
+        return injectTable
     }
 }

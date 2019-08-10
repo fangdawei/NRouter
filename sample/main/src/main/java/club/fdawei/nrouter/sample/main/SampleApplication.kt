@@ -2,7 +2,8 @@ package club.fdawei.nrouter.sample.main
 
 import android.app.Application
 import club.fdawei.nrouter.api.NRouter
-import club.fdawei.nrouter.sample.base.IPageLogger
+import club.fdawei.nrouter.sample.main.pagelogger.PageLogger
+import club.fdawei.nrouter.sample.main.pagelogger.PageLoggerProvider
 
 /**
  * Created by david on 2019/05/29.
@@ -14,6 +15,8 @@ class SampleApplication : Application() {
         NRouter.debug = BuildConfig.DEBUG
         NRouter.init(this)
 
-        NRouter.instance().register(IPageLogger::class, PageLogger())
+        NRouter.registry().register(
+            PageLoggerProvider.routeNodeMeta(PageLogger("SamplePageLog"))
+        )
     }
 }

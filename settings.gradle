@@ -1,5 +1,6 @@
-include ':nrouter-annotation', ':nrouter-processor', ':nrouter-plugin', ':nrouter-api', ':main', ':suba', ':subb', ':subc', ':base'
+//include ':nrouter-annotation', ':nrouter-processor', ':nrouter-plugin', ':nrouter-api'
 
+include ':nrouter-annotation', ':nrouter-processor', ':nrouter-plugin', ':nrouter-api', ':main', ':suba', ':subb', ':subc', ':base'
 project(':base').projectDir = new File('sample/base')
 project(':main').projectDir = new File('sample/main')
 project(':suba').projectDir = new File('sample/suba')

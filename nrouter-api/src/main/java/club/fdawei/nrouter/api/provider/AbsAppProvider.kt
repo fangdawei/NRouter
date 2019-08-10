@@ -1,8 +1,8 @@
 package club.fdawei.nrouter.api.provider
 
-import club.fdawei.nrouter.api.inject.InjectRegistry
-import club.fdawei.nrouter.api.route.RouteRegistry
-import club.fdawei.nrouter.api.scheme.SchemeRegistry
+import club.fdawei.nrouter.api.registry.InjectRegistry
+import club.fdawei.nrouter.api.registry.RouteRegistry
+import club.fdawei.nrouter.api.registry.SchemeRegistry
 
 /**
  * Created by david on 2019/06/06.

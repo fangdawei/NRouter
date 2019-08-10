@@ -6,9 +6,5 @@ package club.fdawei.nrouter.api.route
 class AddressingResult(
     val routeNodeMeta: RouteNodeMeta?,
     val routeHandler: RouteHandler?,
-    private val interceptors: List<InterceptorMeta>
-) {
-    val sortedInterceptors: List<RouteInterceptor> by lazy {
-        interceptors.sortedBy { it.priority }.map { it.interceptor }
-    }
-}
+    val interceptors: List<RouteInterceptor>
+)

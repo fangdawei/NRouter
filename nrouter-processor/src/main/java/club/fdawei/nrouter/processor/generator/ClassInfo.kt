@@ -5,8 +5,8 @@ package club.fdawei.nrouter.processor.generator
  */
 object ClassInfo {
 
-    const val PROVIDER_PACKAGE = "club.fdawei.nrouter.providers"
-    const val PROVIDER_NAME_PREFIX = "Module_"
+    const val PROVIDER_PACKAGE = "nrouter.generated.providers"
+    const val PROVIDER_NAME_PREFIX = "NRouter_"
     const val PROVIDER_NAME_SUFFIX = "_Provider"
     const val INJECTOR_NAME_SUFFIX = "_Injector"
 
@@ -19,17 +19,15 @@ object ClassInfo {
     }
 
     object RouteRegistry {
-        const val FUN_REGISTER_ROUTE_NODE = "registerRouteNode"
-        const val FUN_REGISTER_INTERCEPTOR = "registerInterceptor"
+        const val FUN_REGISTER = "register"
     }
 
     object InjectRegistry {
-        const val FUN_REGISTER_PROVIDER = "registerProvider"
-        const val FUN_REGISTER_INJECTOR = "registerInjector"
+        const val FUN_REGISTER = "register"
     }
 
     object SchemeRegistry {
-        const val FUN_REGISTER_SCHEME = "registerScheme"
+        const val FUN_REGISTER = "register"
     }
 
     object MultiProvider {

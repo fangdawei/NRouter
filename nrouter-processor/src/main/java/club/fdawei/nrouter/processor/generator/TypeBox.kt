@@ -15,15 +15,15 @@ object TypeBox {
     const val AUTOWIRED_PROVIDER_NAME = "club.fdawei.nrouter.api.inject.AutowiredProvider"
 
     val ROUTE_REGISTRY = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.route.RouteRegistry"
+        "club.fdawei.nrouter.api.registry.RouteRegistry"
     )
 
     val INJECT_REGISTRY = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.inject.InjectRegistry"
+        "club.fdawei.nrouter.api.registry.InjectRegistry"
     )
 
     val SCHEME_REGISTRY = ClassName.bestGuess(
-        "club.fdawei.nrouter.api.scheme.SchemeRegistry"
+        "club.fdawei.nrouter.api.registry.SchemeRegistry"
     )
 
     val MULTI_PROVIDER = ClassName.bestGuess(

@@ -40,7 +40,7 @@ class NRouterProcessor : AbstractProcessor() {
         context.moduleName = processingEnv.options[KAPT_ARG_MODULE_NAME]
         context.isApp = processingEnv.options[KAPT_ARG_IS_APP]?.toBoolean() ?: false
 
-        logger.w("init $context")
+        logger.i("init $context")
     }
 
     override fun getSupportedAnnotationTypes(): MutableSet<String> {
@@ -49,7 +49,7 @@ class NRouterProcessor : AbstractProcessor() {
             Interceptor::class.java.canonicalName,
             Provider::class.java.canonicalName,
             Autowired::class.java.canonicalName,
-            Scheme::class.java.canonicalName
+            SchemeAware::class.java.canonicalName
         )
     }
 
@@ -58,7 +58,6 @@ class NRouterProcessor : AbstractProcessor() {
     }
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment?): Boolean {
-        logger.w("process start")
         if (roundEnv == null) {
             return false
         }
@@ -117,7 +116,7 @@ class NRouterProcessor : AbstractProcessor() {
     }
 
     private fun collectSchemeWith(roundEnv: RoundEnvironment) {
-        val elements = roundEnv.getElementsAnnotatedWith(Scheme::class.java)
+        val elements = roundEnv.getElementsAnnotatedWith(SchemeAware::class.java)
         elements.forEach {
             if (it.kind == ElementKind.CLASS) {
                 providerGenerator.addSchemeWith(it as TypeElement)

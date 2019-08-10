@@ -1,24 +1,20 @@
 package club.fdawei.nrouter.plugin.handler
 
+import club.fdawei.nrouter.plugin.base.IHandler
 import club.fdawei.nrouter.plugin.common.ClassInfo
 import club.fdawei.nrouter.plugin.ext.SchemeConfig
-import club.fdawei.nrouter.plugin.log.PluginLogger
 import groovy.xml.XmlUtil
 
 /**
  * Create by david on 2019/07/03.
  */
-class ManifestHandler {
+class ManifestInjector implements IHandler {
 
     private File manifestFile
     private SchemeConfig schemeConfig
     private xmlParser = new XmlParser()
 
-    private ManifestHandler(File manifestFile, SchemeConfig schemeConfig) {
-        this.manifestFile = manifestFile
-        this.schemeConfig = schemeConfig
-    }
-
+    @Override
     void handle() {
         if (manifestFile == null || !manifestFile.exists()) {
             return
@@ -41,7 +37,10 @@ class ManifestHandler {
         writer.close()
     }
 
-    static ManifestHandler create(File manifestFile, SchemeConfig schemeConfig) {
-        return new ManifestHandler(manifestFile, schemeConfig)
+    static ManifestInjector of(File manifestFile, SchemeConfig schemeConfig) {
+        def injector = new ManifestInjector()
+        injector.schemeConfig = schemeConfig
+        injector.manifestFile = manifestFile
+        return injector
     }
 }

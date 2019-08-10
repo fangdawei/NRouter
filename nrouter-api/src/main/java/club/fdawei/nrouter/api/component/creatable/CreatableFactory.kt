@@ -11,7 +11,7 @@ object CreatableFactory {
         return try {
             kClass.java.newInstance()
         } catch (e: Exception) {
-            safeThrowException("create instance of ${kClass.qualifiedName} error, ${e.message}")
+            safeThrowException("${kClass.qualifiedName} new instance error, ${e.message}")
             null
         }
     }

@@ -35,6 +35,6 @@ class AActivity : AppCompatActivity() {
             NRouter.route("/main/service/main").arg(ServiceOption.STOP).go()
         }
 
-        NRouter.instance().get(IPageLogger::class)?.logPage("AActivity")
+        NRouter.route("/common/page/logger").get(IPageLogger::class)?.logPage("AActivity")
     }
 }
