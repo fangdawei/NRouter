@@ -50,6 +50,12 @@ dependencies {
 }
 ```
 
+添加混淆规则（如果开启了混淆）
+
+```
+-keep class nrouter.generated.providers.NRouter_AppProvider
+```
+
 * 使用
 
 路由Activity
@@ -101,7 +107,6 @@ NRouter.route("/main/service/main")
     .arg(ServiceOption.UNBIND)
     .arg(conn)
     .go()
-
 ```
 
 拦截器
