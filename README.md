@@ -152,7 +152,7 @@ class MainActivity : AppCompatActivity() {
 
 Scheme跳转
 
-app模块下的build.gradle中添加配置
+app模块下的build.gradle中添加配置，开启对scheme的支持
 
 ```
 nrouter {
@@ -162,10 +162,15 @@ nrouter {
         host 'sample'
     }
 }
+```
 
+定义Scheme处理器
+
+```
 @SchemeAware
 class MainSchemeHandler : SchemeHandler {
     override fun handle(intent: Intent): Boolean {
+        //处理scheme
         return true
     }
 }
