@@ -38,7 +38,7 @@ allprojects {
 }
 ```
 
-Module目录下的build.gradle中添加配置
+module目录下的build.gradle中添加配置
 
 ```
 apply plugin: 'nrouter-plugin'
